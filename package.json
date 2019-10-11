@@ -1,7 +1,7 @@
 {
   "name": "car-reader",
   "version": "1.0.0",
-  "description": "Webstite for automation community",
+  "description": "Website for automation community",
   "main": "index.js",
   "dependencies": {
     "express": "^4.17.1"
