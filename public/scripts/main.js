@@ -9,7 +9,6 @@ let carData = {}
 
 const recognize = async (data) => {
   const { data: { text } } = await Tesseract.recognize(data, 'eng', {
-    // corePath: './scripts/tesseract-core.wasm.js',
     logger: m => {
       console.log(m)
       if (m.status === 'recognizing text') {
