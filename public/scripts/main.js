@@ -37,8 +37,10 @@ input.addEventListener('change', () => {
 const createDownload = async (filename, type) => {
   download.innerHTML = ''
   filteredData = filterSelected(carData, settings)
-  csv = await getCSV(filteredData)
-  console.log(carData)
+  const options = {
+    header: settings.saveHeader.checked
+  }
+  csv = await getCSV(filteredData, options)
   const file = new Blob([csv], { type })
   const link = document.createElement('a')
   const url = URL.createObjectURL(file)
@@ -76,6 +78,7 @@ btnClearSettings.addEventListener('click', () => {
   localStorage.removeItem('settings')
   settings = getInitialControls()
   displaySettings()
+  createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
 })
 
 const displayCarData = () => {
