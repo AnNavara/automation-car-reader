@@ -33,11 +33,11 @@
       <textarea rows="50" cols="50" id="Text"></textarea>
     </div>
     <div class="settings">
-      <h3>Things to export</h3>
-      <button class="btn clearSettings">Default Settings</button>
-      <form>
-
-      </form>
+      <div class="settings__wrapper">
+        <h3>Things to export</h3>
+        <button class="btn clearSettings">Default Settings</button>
+      </div>
+      <form></form>
     </div>
   </div>
   <template id="Template">
@@ -51,7 +51,7 @@
   <script src="https://cdn.jsdelivr.net/npm/jimp@0.8.4/browser/lib/jimp.min.js"></script>
   <script src='https://unpkg.com/tesseract.js@v2.0.0-beta.1/dist/tesseract.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
-  <script src="./scripts/main.js"></script>
+  <script type="module" src="./scripts/main.js"></script>
 </body>
 
 </html>

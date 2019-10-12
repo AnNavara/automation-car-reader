@@ -120,6 +120,12 @@ body {
   flex-grow: 1;
 }
 
+.settings__wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
 .Result__wrapper {
   display: flex;
   flex-direction: row;
