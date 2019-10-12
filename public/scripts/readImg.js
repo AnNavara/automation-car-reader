@@ -27,13 +27,9 @@ const readImg = async (file, left, top, width, height) => {
 }
 
 btnHideImages.addEventListener('click', () => {
-  toggleImages()
+  imageContainer.classList.toggle('imgs--show')
   btnHideImages.classList.toggle('hide--open')
 })
-
-const toggleImages = () => {
-  imageContainer.classList.toggle('imgs--show')
-}
 
 export {
   readImg

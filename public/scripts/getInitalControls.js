@@ -1,4 +1,4 @@
-const getInitialSettings = () => {
+export const getInitialControls = () => {
   return {
     saveHeader: {
       elementType: 'input',
@@ -290,5 +290,3 @@ const getInitialSettings = () => {
     },
   }
 }
-
-export default getInitialSettings
