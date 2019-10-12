@@ -25,8 +25,7 @@ const readFile = () => {
     carData = { ...carData, ...newData }
     storeCar()
     displayCarData()
-    csv = await getCSV(filteredData())
-    createDownload(csv, 'car.csv', 'text/csv')
+    createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
   })
   reader.readAsDataURL(input.files[0])
 }
@@ -35,21 +34,25 @@ input.addEventListener('change', () => {
   readFile()
 })
 
-const createDownload = (data, filename, type) => {
+const createDownload = async (filename, type) => {
   download.innerHTML = ''
-  const file = new Blob([data], { type })
+  filteredData = filterSelected(carData, settings)
+  csv = await getCSV(filteredData)
+  console.log(carData)
+  const file = new Blob([csv], { type })
   const link = document.createElement('a')
   const url = URL.createObjectURL(file)
   link.href = url
   link.classList.add('btn')
   link.download = filename
-  link.innerHTML = 'Download car CSV'
+  link.innerHTML = `Download ${carData.company} - ${carData.model}.csv`
   download.appendChild(link)
 }
 
 const changeSettings = (controlName) => {
   settings[controlName].checked = !settings[controlName].checked
   saveSettings()
+  createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
 }
 
 const displaySettings = () => {
@@ -86,7 +89,6 @@ const storeCar = () => {
 const getStoredCar = () => {
   if (localStorage.getItem('carData')) {
     carData = JSON.parse(localStorage.getItem('carData'))
-    filteredData = filterSelected(carData, settings)
   }
 }
 
@@ -96,17 +98,14 @@ const clearCarStore = () => {
 
 const clearCarData = () => {
   carData = {}
-  filteredData = filterSelected(carData, settings)
   clearCarStore()
   displayCarData()
 }
 
 const updateCarDataFromInput = async input => {
   carData = { ...input }
-  filteredData = filterSelected(carData, settings)
   storeCar()
-  csv = await getCSV(filteredData)
-  createDownload(csv, 'car.csv', 'text/csv')
+  createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
 }
 
 textEl.addEventListener('input', () => {
@@ -120,9 +119,7 @@ window.onload = async () => {
   getStoredCar()
   displayCarData()
   displaySettings()
-  filteredData = filterSelected(carData, settings)
-  csv = await getCSV(filteredData)
-  createDownload(csv, 'car.csv', 'text/csv')
+  createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
 }
 
 export {
