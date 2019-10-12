@@ -1,21 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="style.css">
   <title>Document</title>
 </head>
+
 <body>
-  <input type="file" name="" id="File">
-  <img src="" id="Image" />
-  <span id="Progress"></span>
-  <div id="Download"></div>
-  <button id="Clear">Clear Saved</button>
-  <pre id="Text"></pre>
+  <div class="Instruction">
+    <p>Upload 3 screenshots of car from last page of car designer. From Design (named 1.png), Markets(2.png) and Test
+      Track(3.png) tabs.</p>
+  </div>
+  <div class="Controls Wrapper">
+    <div>
+      <input type="file" name="" id="File">
+      <span id="Progress"></span>
+    </div>
+    <div>
+      <button class="hide">Hide</button>
+      <div class="imgs"></div>
+    </div>
+  </div>
+  <div class="content Wrapper">
+    <div class="Result">
+      <div class="Result__wrapper">
+        <button class="btn" id="Clear">Clear Saved</button>
+        <div id="Download"></div>
+      </div>
+      <textarea rows="50" cols="50" id="Text"></textarea>
+    </div>
+    <div class="settings">
+      <h3>Things to export</h3>
+      <button class="btn clearSettings">Default Settings</button>
+      <form>
+
+      </form>
+    </div>
+  </div>
+  <template id="Template">
+    <div class="setting">
+      <label>
+        <input class="checkbox" type="checkbox">
+        <span class="textContent"></span>
+      </label>
+    </div>
+  </template>
   <script src="https://cdn.jsdelivr.net/npm/jimp@0.8.4/browser/lib/jimp.min.js"></script>
   <script src='https://unpkg.com/tesseract.js@v2.0.0-beta.1/dist/tesseract.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
   <script src="./scripts/main.js"></script>
 </body>
+
 </html>
