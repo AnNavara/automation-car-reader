@@ -82,6 +82,7 @@ btnClearSettings.addEventListener('click', () => {
 })
 
 const displayCarData = () => {
+  console.log('Car display run:', carData)
   textEl.innerHTML = JSON.stringify(carData, null, 2)
 }
 

@@ -35,9 +35,9 @@ const getVehicleData = async (img) => {
           info.gears = parseInt(line[1])
           break
         case 'Wheelbase':
-          info.wheelbase = parseFloat(line[5])
-          info.length = parseFloat(line[7])
-          info.width = parseFloat(line[9])
+          info.wheelbase = checkValidity(parseFloat(line[5]), 100, 100)
+          info.length = checkValidity(parseFloat(line[7]), 100, 100)
+          info.width = checkValidity((line[9]), 100, 100)
           break
         case 'Drivetrain:':
           info.enginePosition = [line[1], line[2]].join(' ')
