@@ -36,6 +36,9 @@ input.addEventListener('change', () => {
 
 const createDownload = async (filename, type) => {
   download.innerHTML = ''
+  if (carData.company === undefined) {
+    return
+  }
   filteredData = filterSelected(carData, settings)
   const options = {
     header: settings.saveHeader.checked
@@ -82,8 +85,8 @@ btnClearSettings.addEventListener('click', () => {
 })
 
 const displayCarData = () => {
-  console.log('Car display run:', carData)
-  textEl.innerHTML = JSON.stringify(carData, null, 2)
+  console.log('Car display run:', JSON.stringify(carData, null, 2))
+  textEl.value = JSON.stringify(carData, null, 2)
 }
 
 const storeCar = () => {

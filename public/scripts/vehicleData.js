@@ -123,11 +123,11 @@ const getVehicleData = async (img) => {
     info.breakingDustingU = checkValidity(parseFloat(arr[11]), 10, 10)
     info.sizeSize = parseFloat(arr[12])
     info.sizeSizeSize = parseFloat(arr[13])
-    info.frontLoad = parseFloat(arr[14])
-    info.rearLoad = parseFloat(arr[15])
+    info.frontLoad = checkValidity(parseFloat(arr[14]), 500, 10)
+    info.rearLoad = checkValidity(parseFloat(arr[15]), 500, 10)
     info.powerToWeight = checkValidity(parseFloat(arr[18]), 1, 1000)
     info.tow = parseFloat(arr[19])
-    info.load = parseFloat(arr[20])
+    info.load = checkValidity(parseFloat(arr[20]), 2500, 10)
   }
   return info
 }

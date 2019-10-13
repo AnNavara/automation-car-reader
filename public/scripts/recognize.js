@@ -4,6 +4,8 @@ let workerCount = 1
 
 const recognize = async (data) => {
   const { data: { text } } = await Tesseract.recognize(data, 'eng', {
+    langPath: '/lib/tesseract.js-',
+    corePath: '/lib/tesseract-core.wasm.js',
     logger: m => {
       console.log(m)
       if (m.status === 'recognizing text') {
