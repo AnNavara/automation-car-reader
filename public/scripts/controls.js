@@ -1,7 +1,14 @@
-const renderControls = (settings, script)=> {
-  const formElementsArray = []
+const renderControls = (state, script) => {
+  const controlArray = []
+  // Filter settings from unusable entries
+  const settings = Object.keys(state)
+    .filter(key => state[key].elementType === 'input')
+    .reduce((obj, key) => {
+      obj[key] = state[key];
+      return obj;
+    }, {});
   for (let key in settings) {
-    formElementsArray.push({
+    controlArray.push({
       id: key,
       config: settings[key]
     })
@@ -9,7 +16,7 @@ const renderControls = (settings, script)=> {
   const template = document.querySelector('#Template')
   const form = document.createElement('form')
 
-  formElementsArray.forEach(e => {
+  controlArray.forEach(e => {
     const clone = document.importNode(template.content, true)
     const text = clone.querySelector('.textContent')
     const checkbox = clone.querySelector('.checkbox')

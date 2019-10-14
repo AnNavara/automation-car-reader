@@ -1,18 +1,18 @@
-import { lastFileName, storeCar } from './main.js'
+import { state } from './main.js'
 import { readImg } from './readImg.js'
 
 const getVehicleData = async (img) => {
   const info = {}
 
   const checkValidity = (data, check = 100, delimiter = 10) => {
-    let numberData = parseInt(data)
+    let numberData = parseFloat(data)
     if (numberData > check) {
       return numberData / delimiter
     }
     return numberData
   }
 
-  if (lastFileName === '1.png') {
+  if (state.lastFileName === '1.png') {
     const dataSet_1 = await readImg(img, 100, 750, 750, 270)
     const dataSet_2 = await readImg(img, 850, 750, 650, 270)
     const text = dataSet_1 + dataSet_2
@@ -67,7 +67,7 @@ const getVehicleData = async (img) => {
     })
   }
 
-  if (lastFileName === '2.png') {
+  if (state.lastFileName === '2.png') {
     const dataSet_1 = await readImg(img, 350, 815, 80, 180)
     const dataSet_2 = await readImg(img, 600, 815, 80, 180)
     const dataSet_3 = await readImg(img, 815, 815, 110, 150)
@@ -100,7 +100,7 @@ const getVehicleData = async (img) => {
     info.aproximateCost = arr[20]
   }
 
-  if (lastFileName === '3.png') {
+  if (state.lastFileName === '3.png') {
     const dataSet_1 = await readImg(img, 240, 815, 120, 180)
     const dataSet_2 = await readImg(img, 510, 815, 120, 110)
     const dataSet_3 = await readImg(img, 770, 815, 120, 150)

@@ -1,4 +1,4 @@
-export const getInitialControls = () => {
+export const getInitialState = () => {
   return {
     saveHeader: {
       elementType: 'input',
@@ -7,7 +7,7 @@ export const getInitialControls = () => {
         placeholder: 'Export with Header'
       },
       checked: true,
-      displayValue: ''
+      title: ''
     },
     company: {
       elementType: 'input',
@@ -16,7 +16,8 @@ export const getInitialControls = () => {
         placeholder: 'Company name'
       },
       checked: true,
-      displayValue: 'Company'
+      title: 'Company',
+      value: ''
     },
     model: {
       elementType: 'input',
@@ -25,7 +26,7 @@ export const getInitialControls = () => {
         placeholder: 'Model name'
       },
       checked: true,
-      displayValue: 'Model'
+      title: 'Model'
     },
     doorCount: {
       elementType: 'input',
@@ -34,7 +35,8 @@ export const getInitialControls = () => {
         placeholder: 'Number of Doors'
       },
       checked: false,
-      displayValue: 'Doors'
+      title: 'Doors',
+      value: ''
     },
     wheelbase: {
       elementType: 'input',
@@ -43,7 +45,7 @@ export const getInitialControls = () => {
         placeholder: 'Wheelbase'
       },
       checked: false,
-      displayValue: 'Wheelbase'
+      title: 'Wheelbase'
     },
     length: {
       elementType: 'input',
@@ -52,7 +54,7 @@ export const getInitialControls = () => {
         placeholder: 'Total length'
       },
       checked: false,
-      displayValue: 'Length'
+      title: 'Length'
     },
     width: {
       elementType: 'input',
@@ -61,7 +63,7 @@ export const getInitialControls = () => {
         placeholder: 'Total width'
       },
       checked: false,
-      displayValue: 'Width'
+      title: 'Width'
     },
     enginePosition: {
       elementType: 'input',
@@ -70,7 +72,7 @@ export const getInitialControls = () => {
         placeholder: 'Engine Position'
       },
       checked: false,
-      displayValue: 'Engine Position'
+      title: 'Engine Position'
     },
     driveType: {
       elementType: 'input',
@@ -79,7 +81,7 @@ export const getInitialControls = () => {
         placeholder: 'Drive Type'
       },
       checked: true,
-      displayValue: 'Drive Type'
+      title: 'Drive Type'
     },
     gearbox: {
       elementType: 'input',
@@ -88,7 +90,7 @@ export const getInitialControls = () => {
         placeholder: 'Gearbox'
       },
       checked: true,
-      displayValue: 'Gearbox'
+      title: 'Gearbox'
     },
     gears: {
       elementType: 'input',
@@ -97,7 +99,7 @@ export const getInitialControls = () => {
         placeholder: 'Number of Gears'
       },
       checked: true,
-      displayValue: 'Number of Gears'
+      title: 'Number of Gears'
     },
     weight: {
       elementType: 'input',
@@ -106,7 +108,7 @@ export const getInitialControls = () => {
         placeholder: 'Weight'
       },
       checked: true,
-      displayValue: 'Weight'
+      title: 'Weight'
     },
     powerPeak: {
       elementType: 'input',
@@ -115,7 +117,7 @@ export const getInitialControls = () => {
         placeholder: 'Power'
       },
       checked: true,
-      displayValue: 'Power'
+      title: 'Power'
     },
     powerPeakRev: {
       elementType: 'input',
@@ -124,7 +126,7 @@ export const getInitialControls = () => {
         placeholder: 'Rev at Power Peak'
       },
       checked: false,
-      displayValue: 'Rev at Power Peak'
+      title: 'Rev at Power Peak'
     },
     redline: {
       elementType: 'input',
@@ -133,7 +135,7 @@ export const getInitialControls = () => {
         placeholder: 'Redline'
       },
       checked: false,
-      displayValue: 'Redline'
+      title: 'Redline'
     },
     displacement: {
       elementType: 'input',
@@ -142,7 +144,7 @@ export const getInitialControls = () => {
         placeholder: 'Displacement'
       },
       checked: true,
-      displayValue: 'Displacement'
+      title: 'Displacement'
     },
     cylinderArrangement: {
       elementType: 'input',
@@ -151,7 +153,7 @@ export const getInitialControls = () => {
         placeholder: 'Cylinder Arrangement'
       },
       checked: true,
-      displayValue: 'Cylinder Arrangement'
+      title: 'Cylinder Arrangement'
     },
     cylinderCount: {
       elementType: 'input',
@@ -160,7 +162,7 @@ export const getInitialControls = () => {
         placeholder: 'Number of cyliners'
       },
       checked: true,
-      displayValue: 'Cylinders'
+      title: 'Cylinders'
     },
     valvetrain: {
       elementType: 'input',
@@ -169,7 +171,7 @@ export const getInitialControls = () => {
         placeholder: 'Valvetrain'
       },
       checked: true,
-      displayValue: 'Valvetrain'
+      title: 'Valvetrain'
     },
     valveNumber: {
       elementType: 'input',
@@ -178,7 +180,7 @@ export const getInitialControls = () => {
         placeholder: 'Valve Number'
       },
       checked: true,
-      displayValue: 'Valve Number'
+      title: 'Valve Number'
     },
     aspiration: {
       elementType: 'input',
@@ -187,7 +189,7 @@ export const getInitialControls = () => {
         placeholder: 'Aspiration'
       },
       checked: true,
-      displayValue: 'Aspiration'
+      title: 'Aspiration'
     },
     fuelSystem: {
       elementType: 'input',
@@ -196,7 +198,7 @@ export const getInitialControls = () => {
         placeholder: 'Fuel System'
       },
       checked: false,
-      displayValue: 'Fuel System'
+      title: 'Fuel System'
     },
     drivability: {
       elementType: 'input',
@@ -205,7 +207,7 @@ export const getInitialControls = () => {
         placeholder: 'Drivability'
       },
       checked: true,
-      displayValue: 'Drivability'
+      title: 'Drivability'
     },
     sportiness: {
       elementType: 'input',
@@ -214,7 +216,7 @@ export const getInitialControls = () => {
         placeholder: 'Sportiness'
       },
       checked: true,
-      displayValue: 'Sportiness'
+      title: 'Sportiness'
     },
     comfort: {
       elementType: 'input',
@@ -223,7 +225,7 @@ export const getInitialControls = () => {
         placeholder: 'Comfort'
       },
       checked: true,
-      displayValue: 'Comfort'
+      title: 'Comfort'
     },
     prestige: {
       elementType: 'input',
@@ -232,7 +234,7 @@ export const getInitialControls = () => {
         placeholder: 'Prestige'
       },
       checked: false,
-      displayValue: 'Prestige'
+      title: 'Prestige'
     },
     safety: {
       elementType: 'input',
@@ -241,7 +243,7 @@ export const getInitialControls = () => {
         placeholder: 'Safety'
       },
       checked: true,
-      displayValue: 'Safety'
+      title: 'Safety'
     },
     practicality: {
       elementType: 'input',
@@ -250,7 +252,7 @@ export const getInitialControls = () => {
         placeholder: 'Practicality'
       },
       checked: false,
-      displayValue: 'Practicality'
+      title: 'Practicality'
     },
     utility: {
       elementType: 'input',
@@ -259,7 +261,7 @@ export const getInitialControls = () => {
         placeholder: 'Utility'
       },
       checked: false,
-      displayValue: 'Utility'
+      title: 'Utility'
     },
     offroad: {
       elementType: 'input',
@@ -268,7 +270,7 @@ export const getInitialControls = () => {
         placeholder: 'Offroad'
       },
       checked: false,
-      displayValue: 'Offroad'
+      title: 'Offroad'
     },
     reliability: {
       elementType: 'input',
@@ -277,7 +279,7 @@ export const getInitialControls = () => {
         placeholder: 'Reliability'
       },
       checked: true,
-      displayValue: 'Reliability'
+      title: 'Reliability'
     },
     environmentalResistance: {
       elementType: 'input',
@@ -286,7 +288,7 @@ export const getInitialControls = () => {
         placeholder: 'Environmental Resistance'
       },
       checked: false,
-      displayValue: 'Environmental Resistance'
+      title: 'Environmental Resistance'
     },
     footprint: {
       elementType: 'input',
@@ -295,7 +297,7 @@ export const getInitialControls = () => {
         placeholder: 'Footprint'
       },
       checked: false,
-      displayValue: 'Footprint'
+      title: 'Footprint'
     },
     cargoVolume: {
       elementType: 'input',
@@ -304,7 +306,7 @@ export const getInitialControls = () => {
         placeholder: 'Cargo Volume'
       },
       checked: false,
-      displayValue: 'Cargo Volume'
+      title: 'Cargo Volume'
     },
     passengerVolume: {
       elementType: 'input',
@@ -313,7 +315,7 @@ export const getInitialControls = () => {
         placeholder: 'Passenger Volume'
       },
       checked: false,
-      displayValue: 'Passenger Volume'
+      title: 'Passenger Volume'
     },
     serviceCosts: {
       elementType: 'input',
@@ -322,7 +324,7 @@ export const getInitialControls = () => {
         placeholder: 'Service Costs'
       },
       checked: false,
-      displayValue: 'Service Costs'
+      title: 'Service Costs'
     },
     fuelEconomy: {
       elementType: 'input',
@@ -331,7 +333,7 @@ export const getInitialControls = () => {
         placeholder: 'Fuel Economy'
       },
       checked: true,
-      displayValue: 'Fuel Economy'
+      title: 'Fuel Economy'
     },
     emissions: {
       elementType: 'input',
@@ -340,7 +342,7 @@ export const getInitialControls = () => {
         placeholder: 'Emissions'
       },
       checked: false,
-      displayValue: 'Emissions'
+      title: 'Emissions'
     },
     octane: {
       elementType: 'input',
@@ -349,7 +351,7 @@ export const getInitialControls = () => {
         placeholder: 'Octane'
       },
       checked: false,
-      displayValue: 'Octane'
+      title: 'Octane'
     },
     materialCosts: {
       elementType: 'input',
@@ -358,7 +360,7 @@ export const getInitialControls = () => {
         placeholder: 'Material Costs'
       },
       checked: false,
-      displayValue: 'Material Costs'
+      title: 'Material Costs'
     },
     productionUnits: {
       elementType: 'input',
@@ -367,7 +369,7 @@ export const getInitialControls = () => {
         placeholder: 'Production Units'
       },
       checked: true,
-      displayValue: 'Production Units'
+      title: 'Production Units'
     },
     engineeringUnits: {
       elementType: 'input',
@@ -376,7 +378,7 @@ export const getInitialControls = () => {
         placeholder: 'Engineering Units'
       },
       checked: true,
-      displayValue: 'Engineering Units'
+      title: 'Engineering Units'
     },
     aproximateCost: {
       elementType: 'input',
@@ -385,7 +387,7 @@ export const getInitialControls = () => {
         placeholder: 'Aproximate Cost'
       },
       checked: false,
-      displayValue: 'Aproximate Cost'
+      title: 'Aproximate Cost'
     },
     topSpeed: {
       elementType: 'input',
@@ -394,7 +396,7 @@ export const getInitialControls = () => {
         placeholder: 'Top Speed'
       },
       checked: true,
-      displayValue: 'Top Speed'
+      title: 'Top Speed'
     },
     acceleration: {
       elementType: 'input',
@@ -403,7 +405,7 @@ export const getInitialControls = () => {
         placeholder: 'Acceleration from standstill'
       },
       checked: true,
-      displayValue: 'Acceleration from standstill'
+      title: 'Acceleration from standstill'
     },
     speedingUp: {
       elementType: 'input',
@@ -412,7 +414,7 @@ export const getInitialControls = () => {
         placeholder: 'Speeding Up'
       },
       checked: true,
-      displayValue: 'Speeding Up'
+      title: 'Speeding Up'
     },
     oneFourthMileTime: {
       elementType: 'input',
@@ -421,7 +423,7 @@ export const getInitialControls = () => {
         placeholder: '1/4 Mile Time'
       },
       checked: false,
-      displayValue: '1/4 Mile Time'
+      title: '1/4 Mile Time'
     },
     oneKMTime: {
       elementType: 'input',
@@ -430,7 +432,7 @@ export const getInitialControls = () => {
         placeholder: '1 km Time'
       },
       checked: false,
-      displayValue: '1 km Time'
+      title: '1 km Time'
     },
     twentyMG: {
       elementType: 'input',
@@ -439,7 +441,7 @@ export const getInitialControls = () => {
         placeholder: '20 m G force'
       },
       checked: false,
-      displayValue: '20 m G force'
+      title: '20 m G force'
     },
     twohundredMG: {
       elementType: 'input',
@@ -448,7 +450,7 @@ export const getInitialControls = () => {
         placeholder: '200 m G force'
       },
       checked: false,
-      displayValue: '200 m G force'
+      title: '200 m G force'
     },
     rollAngle: {
       elementType: 'input',
@@ -457,7 +459,7 @@ export const getInitialControls = () => {
         placeholder: 'Roll Angle'
       },
       checked: true,
-      displayValue: 'Roll Angle'
+      title: 'Roll Angle'
     },
     brakingDistance: {
       elementType: 'input',
@@ -466,7 +468,7 @@ export const getInitialControls = () => {
         placeholder: 'Braking Distance'
       },
       checked: true,
-      displayValue: 'Braking Distance'
+      title: 'Braking Distance'
     },
     breakeFadeD: {
       elementType: 'input',
@@ -475,7 +477,7 @@ export const getInitialControls = () => {
         placeholder: 'Brake fade Drivability'
       },
       checked: false,
-      displayValue: 'Brake fade Drivability'
+      title: 'Brake fade Drivability'
     },
     breakeFadeS: {
       elementType: 'input',
@@ -484,7 +486,7 @@ export const getInitialControls = () => {
         placeholder: 'Brake fade Sportiness'
       },
       checked: false,
-      displayValue: 'Brake fade Sportiness'
+      title: 'Brake fade Sportiness'
     },
     breakeFadeU: {
       elementType: 'input',
@@ -493,7 +495,7 @@ export const getInitialControls = () => {
         placeholder: 'Brake fade Utility'
       },
       checked: false,
-      displayValue: 'Brake fade Utility'
+      title: 'Brake fade Utility'
     },
     frontalArea: {
       elementType: 'input',
@@ -502,7 +504,7 @@ export const getInitialControls = () => {
         placeholder: 'Frontal Area'
       },
       checked: false,
-      displayValue: 'Frontal Area'
+      title: 'Frontal Area'
     },
     totalCoeficientOfDrag: {
       elementType: 'input',
@@ -511,7 +513,7 @@ export const getInitialControls = () => {
         placeholder: 'Total Coeficient of Drag'
       },
       checked: false,
-      displayValue: 'Total Coeficient of Drag'
+      title: 'Total Coeficient of Drag'
     },
     frontDownforce: {
       elementType: 'input',
@@ -520,7 +522,7 @@ export const getInitialControls = () => {
         placeholder: 'Front Downforce'
       },
       checked: false,
-      displayValue: 'Front Downforce'
+      title: 'Front Downforce'
     },
     rearDownforce: {
       elementType: 'input',
@@ -529,7 +531,7 @@ export const getInitialControls = () => {
         placeholder: 'Rear Downforce'
       },
       checked: false,
-      displayValue: 'Rear Downforce'
+      title: 'Rear Downforce'
     },
     powerToWeight: {
       elementType: 'input',
@@ -538,7 +540,7 @@ export const getInitialControls = () => {
         placeholder: 'Power to Weight'
       },
       checked: false,
-      displayValue: 'Power to Weight'
+      title: 'Power to Weight'
     },
     towCapacity: {
       elementType: 'input',
@@ -547,7 +549,7 @@ export const getInitialControls = () => {
         placeholder: 'Tow Capacity'
       },
       checked: false,
-      displayValue: 'Tow Capacity'
+      title: 'Tow Capacity'
     },
     loadCapacity: {
       elementType: 'input',
@@ -556,7 +558,7 @@ export const getInitialControls = () => {
         placeholder: 'Load Capacity'
       },
       checked: false,
-      displayValue: 'Load Capacity'
+      title: 'Load Capacity'
     }
   }
 }

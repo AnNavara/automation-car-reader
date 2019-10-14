@@ -1,30 +1,26 @@
-import { getInitialControls } from './getInitalControls.js'
+import { getInitialState } from './getInitalState.js'
 import renderControls from './controls.js'
 import { getVehicleData } from './vehicleData.js'
-import filterSelected from './filter.js'
 import getCSV from './getCSV.js'
+import { updateObject } from './utility.js'
 
 const input = document.getElementById('File')
-const download = document.getElementById('Download')
+const downloadEl = document.getElementById('Download')
 const textEl = document.getElementById('Text')
-const clearButton = document.getElementById('Clear')
+const clearCarBtn = document.getElementById('Clear')
 const btnClearSettings = document.querySelector('.clearSettings')
 const controlsEl = document.querySelector('.controls')
 
-let carData = {}
-let settings = {}
-let lastFileName = ''
-let csv = null
+let state = {}
 
 const readFile = () => {
   const reader = new FileReader()
   reader.addEventListener('load', async () => {
-    lastFileName = input.files[0].name
+    state.lastFileName = input.files[0].name
     const newData = await getVehicleData(reader.result)
-    carData = { ...carData, ...newData }
-    storeCar()
+    Object.keys(newData).forEach(key => state[key].value = newData[key])
+    storeLocal('state', JSON.stringify(state))
     displayCarData()
-    createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
   })
   reader.readAsDataURL(input.files[0])
 }
@@ -33,99 +29,99 @@ input.addEventListener('change', () => {
   readFile()
 })
 
-const createDownload = async (filename, type) => {
-  download.innerHTML = ''
-  const options = {
-    header: settings.saveHeader.checked
+const initialiseState = () => {
+  if (getLocal('state')) {
+    state = JSON.parse(getLocal('state'))
+    return
   }
-  csv = await getCSV(carData, options)
+  state = getInitialState()
+}
+
+const getLocal = id => localStorage.getItem(id)
+const storeLocal = (id, data) => localStorage.setItem(id, data)
+const clearStore = id => localStorage.removeItem(id)
+
+const createDownload = async (type) => {
+  downloadEl.innerHTML = ''
+  const options = {
+    header: state.saveHeader.checked
+  }
+  const csv = await getCSV(state, options)
   const file = new Blob([csv], { type })
   const link = document.createElement('a')
   const url = URL.createObjectURL(file)
   link.href = url
   link.classList.add('btn')
-  link.download = filename
-  link.innerHTML = `Download ${carData.company || 'Company'} - ${carData.model || 'Model'}.csv`
-  download.appendChild(link)
+  link.download = `${state.company.value || 'Company'} - ${state.model.value || 'Model'}.csv`
+  link.textContent = `Download ${state.company.value || 'Company'} - ${state.model.value || 'Model'}.csv`
+  downloadEl.appendChild(link)
 }
 
-const changeSettings = (controlName) => {
-  settings[controlName].checked = !settings[controlName].checked
-  saveSettings()
-  createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
+const onSettingsChange = controlName => {
+  state[controlName].checked = !state[controlName].checked
+  storeLocal('state', JSON.stringify(state))
+  createDownload('text/csv')
 }
 
 const displaySettings = () => {
   controlsEl.innerHTML = ''
-  controlsEl.appendChild(renderControls(settings, changeSettings))
-}
-
-const saveSettings = () => {
-  localStorage.setItem('settings', JSON.stringify(settings))
-}
-
-const getSettings = () => {
-  if (localStorage.getItem('settings')) {
-    settings = JSON.parse(localStorage.getItem('settings'))
-    return
-  }
-  settings = getInitialControls()
+  controlsEl.appendChild(renderControls(state, onSettingsChange))
 }
 
 btnClearSettings.addEventListener('click', () => {
-  localStorage.removeItem('settings')
-  settings = getInitialControls()
+  state = updateObject(state, getInitialState())
+  storeLocal('state', JSON.stringify(state))
   displaySettings()
-  createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
 })
 
 const displayCarData = () => {
-  textEl.value = JSON.stringify(carData, null, 2)
-}
-
-const storeCar = () => {
-  localStorage.setItem('carData', JSON.stringify(carData))
-}
-
-const getStoredCar = () => {
-  if (localStorage.getItem('carData')) {
-    carData = JSON.parse(localStorage.getItem('carData'))
+  const carData = Object.keys(state)
+    .filter(key => state[key].value)
+    .reduce((obj, key) => {
+      obj[key] = state[key].value;
+      return obj;
+    }, {});
+  if (Object.entries(carData).length !== 0 && carData.constructor === Object) {
+    textEl.value = JSON.stringify(carData, null, 2)
   }
 }
 
-const clearCarStore = () => {
-  localStorage.removeItem('carData')
-}
-
 const clearCarData = () => {
-  carData = {}
-  clearCarStore()
+  const updatedState = Object.keys(state)
+    .filter(key => state[key].value)
+    .reduce((obj, key) => {
+      obj[key] = state[key].value;
+      return obj;
+    }, {});
+  Object.keys(state).forEach(key => {
+    if (state[key].value) {
+      console.log(state[key].value)
+      state[key].value = null
+    }
+  })
+  storeLocal('state', JSON.stringify(state))
   displayCarData()
 }
 
 const updateCarDataFromInput = async input => {
-  carData = { ...input }
-  storeCar()
-  createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
+  Object.keys(input).forEach(key => state[key].value = input[key])
+  storeLocal('state', JSON.stringify(state))
+  createDownload('text/csv')
 }
 
 textEl.addEventListener('input', () => {
   updateCarDataFromInput(JSON.parse(event.target.value))
 })
 
-clearButton.addEventListener('click', () => { clearCarData() })
+clearCarBtn.addEventListener('click', () => { clearCarData() })
 
 window.onload = async () => {
-  getSettings()
-  getStoredCar()
-  displayCarData()
+  initialiseState()
   displaySettings()
-  createDownload(`${carData.company} - ${carData.model}.csv`, 'text/csv')
+  displayCarData()
+  createDownload('text/csv')
 }
 
 export {
-  lastFileName,
-  carData,
-  storeCar,
-  settings
+  state
 }
