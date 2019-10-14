@@ -5,10 +5,11 @@ const getVehicleData = async (img) => {
   const info = {}
 
   const checkValidity = (data, check = 100, delimiter = 10) => {
-    if (data > check) {
-      return data / delimiter
+    let numberData = parseInt(data)
+    if (numberData > check) {
+      return numberData / delimiter
     }
-    return data
+    return numberData
   }
 
   if (lastFileName === '1.png') {
@@ -25,7 +26,7 @@ const getVehicleData = async (img) => {
 
       switch (line[0]) {
         case 'Type:':
-          info.doorCount = parseInt(line[1])
+          info.doorCount = checkValidity(line[1])
           break
         case 'Weight:':
           info.weight = parseInt(line[1])
@@ -109,8 +110,8 @@ const getVehicleData = async (img) => {
     const dirtyArr = text.split(/\r?\n/)
     const arr = dirtyArr.filter(e => e !== '')
 
-    info.topSpeed = parseInt(arr[0])
-    info.acceleration = checkValidity(parseFloat(arr[1]), 30)
+    info.topSpeed = checkValidity(arr[0])
+    info.acceleration = checkValidity(arr[1], 30)
     info.speedingUp = checkValidity(parseFloat(arr[2]))
     info.oneFourthMileTime = checkValidity(parseFloat(arr[3]), null, 100)
     info.oneKMTime = checkValidity(parseFloat(arr[4]), null, 100)

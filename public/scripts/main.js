@@ -13,7 +13,6 @@ const controlsEl = document.querySelector('.controls')
 
 let carData = {}
 let settings = {}
-let filteredData = {}
 let lastFileName = ''
 let csv = null
 
@@ -36,11 +35,10 @@ input.addEventListener('change', () => {
 
 const createDownload = async (filename, type) => {
   download.innerHTML = ''
-  filteredData = filterSelected(carData, settings)
   const options = {
     header: settings.saveHeader.checked
   }
-  csv = await getCSV(filteredData, options)
+  csv = await getCSV(carData, options)
   const file = new Blob([csv], { type })
   const link = document.createElement('a')
   const url = URL.createObjectURL(file)
@@ -128,5 +126,6 @@ window.onload = async () => {
 export {
   lastFileName,
   carData,
-  storeCar
+  storeCar,
+  settings
 }
