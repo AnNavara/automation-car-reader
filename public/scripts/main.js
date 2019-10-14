@@ -36,9 +36,6 @@ input.addEventListener('change', () => {
 
 const createDownload = async (filename, type) => {
   download.innerHTML = ''
-  if (carData.company === undefined) {
-    return
-  }
   filteredData = filterSelected(carData, settings)
   const options = {
     header: settings.saveHeader.checked
@@ -50,7 +47,7 @@ const createDownload = async (filename, type) => {
   link.href = url
   link.classList.add('btn')
   link.download = filename
-  link.innerHTML = `Download ${carData.company} - ${carData.model}.csv`
+  link.innerHTML = `Download ${carData.company || 'Company'} - ${carData.model || 'Model'}.csv`
   download.appendChild(link)
 }
 

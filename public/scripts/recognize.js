@@ -2,7 +2,7 @@ const progress = document.querySelector('#Progress')
 let workerId = ''
 let workerCount = 0
 
-const recognize = async (data) => {
+const recognize = async data => {
   const { data: { text } } = await Tesseract.recognize(data, 'eng', {
     langPath: '/lib/tesseract.js-',
     corePath: '/lib/tesseract-core.wasm.js',

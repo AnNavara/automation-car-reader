@@ -37,7 +37,7 @@ const getVehicleData = async (img) => {
         case 'Wheelbase':
           info.wheelbase = checkValidity(parseFloat(line[5]), 100, 100)
           info.length = checkValidity(parseFloat(line[7]), 100, 100)
-          info.width = checkValidity((line[9]), 100, 100)
+          info.width = checkValidity(parseInt((line[9])), 100, 100)
           break
         case 'Drivetrain:':
           info.enginePosition = [line[1], line[2]].join(' ')
@@ -87,16 +87,16 @@ const getVehicleData = async (img) => {
     info.reliability = checkValidity(arr[8])
     info.environmentalResistance = checkValidity(arr[9])
     info.footprint = checkValidity(parseFloat(arr[10]), 10)
-    info.trunk = parseInt(arr[11])
-    info.space = parseInt(arr[12])
-    info.serviceCost = parseFloat(arr[13])
-    info.fuelEco = checkValidity(parseFloat(arr[14]), 30)
-    info.cancer = arr[15]
-    info.fuelType = arr[16]
-    info.costof = parseInt(arr[17])
+    info.cargoVolume = parseInt(arr[11])
+    info.passengerVolume = parseInt(arr[12])
+    info.serviceCosts = checkValidity(parseFloat(arr[13]), 5000, 10)
+    info.fuelEconomy = checkValidity(parseFloat(arr[14]), 30)
+    info.emissions = arr[15]
+    info.octane = arr[16]
+    info.materialCosts = parseInt(arr[17])
     info.productionUnits = checkValidity(arr[18], 150)
-    info.engeneeringUnits = checkValidity(arr[19], 150)
-    info.price = arr[20]
+    info.engineeringUnits = checkValidity(arr[19], 150)
+    info.aproximateCost = arr[20]
   }
 
   if (lastFileName === '3.png') {
@@ -111,23 +111,23 @@ const getVehicleData = async (img) => {
 
     info.topSpeed = parseInt(arr[0])
     info.acceleration = checkValidity(parseFloat(arr[1]), 30)
-    info.acceleration2 = checkValidity(parseFloat(arr[2]))
-    info.oneForthMile = checkValidity(parseFloat(arr[3]), null, 100)
-    info.oneMile = checkValidity(parseFloat(arr[4]), null, 100)
-    info.twentyG = checkValidity(parseFloat(arr[5]), 10, 1000)
-    info.twohundredG = checkValidity(parseFloat(arr[6]), 10, 1000)
-    info.roll = checkValidity(parseFloat(arr[7]), 15)
+    info.speedingUp = checkValidity(parseFloat(arr[2]))
+    info.oneFourthMileTime = checkValidity(parseFloat(arr[3]), null, 100)
+    info.oneKMTime = checkValidity(parseFloat(arr[4]), null, 100)
+    info.twentyMG = checkValidity(parseFloat(arr[5]), 10, 1000)
+    info.twohundredMG = checkValidity(parseFloat(arr[6]), 10, 1000)
+    info.rollAngle = checkValidity(parseFloat(arr[7]), 15)
     info.brakingDistance = checkValidity(parseFloat(arr[8]))
-    info.breakingDustingD = checkValidity(parseFloat(arr[9]), 10, 10)
-    info.breakingDustingS = checkValidity(parseFloat(arr[10]), 10, 10)
-    info.breakingDustingU = checkValidity(parseFloat(arr[11]), 10, 10)
-    info.sizeSize = parseFloat(arr[12])
-    info.sizeSizeSize = parseFloat(arr[13])
-    info.frontLoad = checkValidity(parseFloat(arr[14]), 500, 10)
-    info.rearLoad = checkValidity(parseFloat(arr[15]), 500, 10)
+    info.breakeFadeD = checkValidity(parseFloat(arr[9]), 10, 10)
+    info.breakeFadeS = checkValidity(parseFloat(arr[10]), 10, 10)
+    info.breakeFadeU = checkValidity(parseFloat(arr[11]), 10, 10)
+    info.frontalArea = parseFloat(arr[12])
+    info.totalCoeficientOfDrag = parseFloat(arr[13])
+    info.frontDownforce = checkValidity(parseFloat(arr[14]), 500, 10)
+    info.rearDownforce = checkValidity(parseFloat(arr[15]), 500, 10)
     info.powerToWeight = checkValidity(parseFloat(arr[18]), 1, 1000)
-    info.tow = parseFloat(arr[19])
-    info.load = checkValidity(parseFloat(arr[20]), 2500, 10)
+    info.towCapacity = parseFloat(arr[19])
+    info.loadCapacity = checkValidity(parseFloat(arr[20]), 2500, 10)
   }
   return info
 }
