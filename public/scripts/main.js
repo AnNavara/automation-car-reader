@@ -19,13 +19,13 @@ const readFile = () => {
   reader.addEventListener('load', async () => {
     try {
       const imageType = await detectImage(reader.result)
-      const newData = await getVehicleData(reader.result, imageType)
-      Object.keys(newData).forEach(key => state[key].value = newData[key])
+      state = await getVehicleData(reader.result, imageType)
       storeLocal('state', JSON.stringify(state))
       displayCarData()
+      createDownload('text/csv')
     } catch (err) {
       console.log(err)
-      document.querySelector('.Instruction').textContent = err
+      document.querySelector('.Instruction').textContent = 'ERROR: ' + err
     }
   })
   reader.readAsDataURL(input.files[0])

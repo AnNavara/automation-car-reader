@@ -13,7 +13,7 @@ const recognize = async data => {
           workerCount++
         }
         if (m.progress !== 1) {
-          progress.innerHTML = `Job - ${workerCount}. Processing: ${(parseFloat(m.progress) * 100).toFixed(0)} %`
+          progress.innerHTML = `Job - ${workerCount}. Processing`
           return
         }
         progress.innerHTML = `Job - ${workerCount} Finished`
@@ -25,7 +25,6 @@ const recognize = async data => {
       }
     }
   });
-  console.log(text)
   return text
 }
 

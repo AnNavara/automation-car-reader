@@ -1,7 +1,7 @@
 export const getInitialState = () => {
   return {
     saveHeader: {
-      elementType: 'input',
+      pageType: 'Helper',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Export with Header'
@@ -10,17 +10,16 @@ export const getInitialState = () => {
       title: ''
     },
     company: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Company name'
       },
       checked: true,
-      title: 'Company',
-      value: ''
+      title: 'Company'
     },
     model: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Model name'
@@ -29,7 +28,7 @@ export const getInitialState = () => {
       title: 'Model'
     },
     doorCount: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Number of Doors'
@@ -38,8 +37,18 @@ export const getInitialState = () => {
       title: 'Doors',
       value: ''
     },
+    seatCount: {
+      pageType: 'Design',
+      elementConfig: {
+        type: 'checkbox',
+        placeholder: 'Number of Seats'
+      },
+      checked: true,
+      title: 'Seats',
+      value: ''
+    },
     wheelbase: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Wheelbase'
@@ -48,7 +57,7 @@ export const getInitialState = () => {
       title: 'Wheelbase'
     },
     length: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Total length'
@@ -57,7 +66,7 @@ export const getInitialState = () => {
       title: 'Length'
     },
     width: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Total width'
@@ -66,7 +75,7 @@ export const getInitialState = () => {
       title: 'Width'
     },
     enginePosition: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Engine Position'
@@ -75,7 +84,7 @@ export const getInitialState = () => {
       title: 'Engine Position'
     },
     driveType: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Drive Type'
@@ -84,7 +93,7 @@ export const getInitialState = () => {
       title: 'Drive Type'
     },
     gearbox: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Gearbox'
@@ -93,7 +102,7 @@ export const getInitialState = () => {
       title: 'Gearbox'
     },
     gears: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Number of Gears'
@@ -102,7 +111,7 @@ export const getInitialState = () => {
       title: 'Number of Gears'
     },
     weight: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Weight'
@@ -111,7 +120,7 @@ export const getInitialState = () => {
       title: 'Weight'
     },
     powerPeak: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Power'
@@ -120,7 +129,7 @@ export const getInitialState = () => {
       title: 'Power'
     },
     powerPeakRev: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Rev at Power Peak'
@@ -129,7 +138,7 @@ export const getInitialState = () => {
       title: 'Rev at Power Peak'
     },
     redline: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Redline'
@@ -138,7 +147,7 @@ export const getInitialState = () => {
       title: 'Redline'
     },
     displacement: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Displacement'
@@ -147,7 +156,7 @@ export const getInitialState = () => {
       title: 'Displacement'
     },
     cylinderArrangement: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Cylinder Arrangement'
@@ -156,7 +165,7 @@ export const getInitialState = () => {
       title: 'Cylinder Arrangement'
     },
     cylinderCount: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Number of cyliners'
@@ -165,7 +174,7 @@ export const getInitialState = () => {
       title: 'Cylinders'
     },
     valvetrain: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Valvetrain'
@@ -174,7 +183,7 @@ export const getInitialState = () => {
       title: 'Valvetrain'
     },
     valveNumber: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Valve Number'
@@ -183,7 +192,7 @@ export const getInitialState = () => {
       title: 'Valve Number'
     },
     aspiration: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Aspiration'
@@ -192,7 +201,7 @@ export const getInitialState = () => {
       title: 'Aspiration'
     },
     fuelSystem: {
-      elementType: 'input',
+      pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Fuel System'
@@ -201,7 +210,7 @@ export const getInitialState = () => {
       title: 'Fuel System'
     },
     drivability: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Drivability'
@@ -210,7 +219,7 @@ export const getInitialState = () => {
       title: 'Drivability'
     },
     sportiness: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Sportiness'
@@ -219,7 +228,7 @@ export const getInitialState = () => {
       title: 'Sportiness'
     },
     comfort: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Comfort'
@@ -228,7 +237,7 @@ export const getInitialState = () => {
       title: 'Comfort'
     },
     prestige: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Prestige'
@@ -237,7 +246,7 @@ export const getInitialState = () => {
       title: 'Prestige'
     },
     safety: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Safety'
@@ -246,7 +255,7 @@ export const getInitialState = () => {
       title: 'Safety'
     },
     practicality: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Practicality'
@@ -255,7 +264,7 @@ export const getInitialState = () => {
       title: 'Practicality'
     },
     utility: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Utility'
@@ -264,7 +273,7 @@ export const getInitialState = () => {
       title: 'Utility'
     },
     offroad: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Offroad'
@@ -273,7 +282,7 @@ export const getInitialState = () => {
       title: 'Offroad'
     },
     reliability: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Reliability'
@@ -282,7 +291,7 @@ export const getInitialState = () => {
       title: 'Reliability'
     },
     environmentalResistance: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Environmental Resistance'
@@ -291,7 +300,7 @@ export const getInitialState = () => {
       title: 'Environmental Resistance'
     },
     footprint: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Footprint'
@@ -300,7 +309,7 @@ export const getInitialState = () => {
       title: 'Footprint'
     },
     cargoVolume: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Cargo Volume'
@@ -309,7 +318,7 @@ export const getInitialState = () => {
       title: 'Cargo Volume'
     },
     passengerVolume: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Passenger Volume'
@@ -318,7 +327,7 @@ export const getInitialState = () => {
       title: 'Passenger Volume'
     },
     serviceCosts: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Service Costs'
@@ -327,7 +336,7 @@ export const getInitialState = () => {
       title: 'Service Costs'
     },
     fuelEconomy: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Fuel Economy'
@@ -336,7 +345,7 @@ export const getInitialState = () => {
       title: 'Fuel Economy'
     },
     emissions: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Emissions'
@@ -345,7 +354,7 @@ export const getInitialState = () => {
       title: 'Emissions'
     },
     octane: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Octane'
@@ -354,7 +363,7 @@ export const getInitialState = () => {
       title: 'Octane'
     },
     materialCosts: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Material Costs'
@@ -363,7 +372,7 @@ export const getInitialState = () => {
       title: 'Material Costs'
     },
     productionUnits: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Production Units'
@@ -372,7 +381,7 @@ export const getInitialState = () => {
       title: 'Production Units'
     },
     engineeringUnits: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Engineering Units'
@@ -381,7 +390,7 @@ export const getInitialState = () => {
       title: 'Engineering Units'
     },
     aproximateCost: {
-      elementType: 'input',
+      pageType: 'Markets',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Aproximate Cost'
@@ -390,7 +399,7 @@ export const getInitialState = () => {
       title: 'Aproximate Cost'
     },
     topSpeed: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Top Speed'
@@ -399,7 +408,7 @@ export const getInitialState = () => {
       title: 'Top Speed'
     },
     acceleration: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Acceleration from standstill'
@@ -408,7 +417,7 @@ export const getInitialState = () => {
       title: 'Acceleration from standstill'
     },
     speedingUp: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Speeding Up'
@@ -417,7 +426,7 @@ export const getInitialState = () => {
       title: 'Speeding Up'
     },
     oneFourthMileTime: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: '1/4 Mile Time'
@@ -426,7 +435,7 @@ export const getInitialState = () => {
       title: '1/4 Mile Time'
     },
     oneKMTime: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: '1 km Time'
@@ -435,7 +444,7 @@ export const getInitialState = () => {
       title: '1 km Time'
     },
     twentyMG: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: '20 m G force'
@@ -444,7 +453,7 @@ export const getInitialState = () => {
       title: '20 m G force'
     },
     twohundredMG: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: '200 m G force'
@@ -453,7 +462,7 @@ export const getInitialState = () => {
       title: '200 m G force'
     },
     rollAngle: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Roll Angle'
@@ -462,7 +471,7 @@ export const getInitialState = () => {
       title: 'Roll Angle'
     },
     brakingDistance: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Braking Distance'
@@ -471,7 +480,7 @@ export const getInitialState = () => {
       title: 'Braking Distance'
     },
     breakeFadeD: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Brake fade Drivability'
@@ -480,7 +489,7 @@ export const getInitialState = () => {
       title: 'Brake fade Drivability'
     },
     breakeFadeS: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Brake fade Sportiness'
@@ -489,7 +498,7 @@ export const getInitialState = () => {
       title: 'Brake fade Sportiness'
     },
     breakeFadeU: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Brake fade Utility'
@@ -498,7 +507,7 @@ export const getInitialState = () => {
       title: 'Brake fade Utility'
     },
     frontalArea: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Frontal Area'
@@ -507,7 +516,7 @@ export const getInitialState = () => {
       title: 'Frontal Area'
     },
     totalCoeficientOfDrag: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Total Coeficient of Drag'
@@ -516,7 +525,7 @@ export const getInitialState = () => {
       title: 'Total Coeficient of Drag'
     },
     frontDownforce: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Front Downforce'
@@ -525,7 +534,7 @@ export const getInitialState = () => {
       title: 'Front Downforce'
     },
     rearDownforce: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Rear Downforce'
@@ -534,7 +543,7 @@ export const getInitialState = () => {
       title: 'Rear Downforce'
     },
     powerToWeight: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Power to Weight'
@@ -543,7 +552,7 @@ export const getInitialState = () => {
       title: 'Power to Weight'
     },
     towCapacity: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Tow Capacity'
@@ -552,7 +561,7 @@ export const getInitialState = () => {
       title: 'Tow Capacity'
     },
     loadCapacity: {
-      elementType: 'input',
+      pageType: 'Test Track',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Load Capacity'

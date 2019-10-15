@@ -1,16 +1,9 @@
 const renderControls = (state, script) => {
   const controlArray = []
-  // Filter settings from unusable entries
-  const settings = Object.keys(state)
-    .filter(key => state[key].elementType === 'input')
-    .reduce((obj, key) => {
-      obj[key] = state[key];
-      return obj;
-    }, {});
-  for (let key in settings) {
+  for (let key in state) {
     controlArray.push({
       id: key,
-      config: settings[key]
+      config: state[key]
     })
   }
   const template = document.querySelector('#Template')

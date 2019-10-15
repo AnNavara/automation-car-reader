@@ -1,7 +1,10 @@
 import { readImg } from './readImg.js'
+import { state } from './main.js'
+import { updateObject } from './utility.js'
 
 const getVehicleData = async (img, imageType) => {
-  const info = {}
+  const textArray = []
+  const newState = { ...state }
 
   const checkValidity = (data, check = 100, delimiter = 10) => {
     let numberData = parseFloat(data)
@@ -12,8 +15,7 @@ const getVehicleData = async (img, imageType) => {
   }
 
   if (imageType === 'Design') {
-    let text = ''
-    const sizes = [
+    const rectangles = [
       // Left side of the Design
       { left: 160, top: 753, width: 600, height: 33 },
       { left: 160, top: 806, width: 600, height: 30 },
@@ -33,126 +35,175 @@ const getVehicleData = async (img, imageType) => {
       { left: 865, top: 954, width: 600, height: 30 },
       { left: 865, top: 985, width: 600, height: 30 }
     ]
-    for (let i = 0; i < sizes.length; i++) {
-      text += await readImg(img, sizes[i])
+    for (let i = 0; i < rectangles.length; i++) {
+      textArray.push(await readImg(img, rectangles[i]))
     }
-    console.log(text)
 
+    // ADD Check for CSR/CSC/3 Letter Skip
+    // Maybe join together model and company
+    newState.company.value = textArray[0].split('-')[0].trim()
+    newState.model.value = textArray[0].split('-')[1].trim()
 
-    const arr = text.split(/\r?\n/)
-    info.company = arr[0].split('-')[0].trim()
-    info.model = arr[0].split('-')[1].trim()
-
-    arr.forEach(e => {
+    textArray.forEach(e => {
       const line = e.split(' ')
 
       switch (line[0]) {
         case 'Type:':
-          info.doorCount = checkValidity(line[1])
+          newState.doorCount.value = checkValidity(line[1])
+          // Evolve this
+          newState.seatCount.value = checkValidity(line[4].replace('/0', ''))
           break
         case 'Weight:':
-          info.weight = parseInt(line[1])
+          newState.weight.value = parseInt(line[1])
           break
         case 'Gearbox:':
-          info.gearbox = line[3]
-          info.gears = parseInt(line[1])
+          newState.gearbox.value = line[3]
+          newState.gears.value = parseInt(line[1])
           break
         case 'Wheelbase':
-          info.wheelbase = checkValidity(parseFloat(line[5]), 100, 100)
-          info.length = checkValidity(parseFloat(line[7]), 100, 100)
-          info.width = checkValidity(parseInt((line[9])), 100, 100)
+          newState.wheelbase.value = checkValidity(parseFloat(line[5]), 100, 100)
+          newState.length.value = checkValidity(parseFloat(line[7]), 100, 100)
+          newState.width.value = checkValidity(parseFloat((line[9])), 100, 100)
           break
         case 'Drivetrain:':
-          info.enginePosition = [line[1], line[2]].join(' ')
-          info.driveType = line[4]
+          newState.enginePosition.value = [line[1], line[2]].join(' ')
+          newState.driveType.value = line[4]
           break
         case 'Power:':
-          info.powerPeak = parseFloat(line[1])
-          info.powerPeakRev = parseInt(line[4])
+          newState.powerPeak.value = parseFloat(line[1])
+          newState.powerPeakRev.value = parseInt(line[4])
           break
         case 'Redline:':
-          info.redline = parseInt(line[1].replace(/\D/, ''))
+          newState.redline.value = parseInt(line[1].replace(/\D/, ''))
           break
         case 'Bottom':
-          info.displacement = parseInt(line[3])
-          info.cylinderArrangement = line[4].replace(/\d/g, '')
-          info.cylinderCount = parseInt(line[4].replace(/\D/g, ''))
+          newState.displacement.value = parseInt(line[3])
+          newState.cylinderArrangement.value = line[4].replace(/\d/g, '')
+          newState.cylinderCount.value = parseInt(line[4].replace(/\D/g, ''))
         case 'Top':
-          info.valvetrain = line[3].split('-')[0]
-          info.valveNumber = parseInt(line[3].split('-')[1])
+          newState.valvetrain.value = line[3].split('-')[0]
+          newState.valveNumber.value = parseInt(line[3].split('-')[1])
           break
         case 'Fuel':
-          info.aspiration = [line[2], line[3]].join(' ')
-          info.fuelSystem = [...line.splice(4)].join(' ')
+          newState.aspiration.value = [line[2], line[3]].join(' ')
+          newState.fuelSystem.value = [...line.splice(4)].join(' ')
         default: return
       }
     })
   }
 
   if (imageType === 'Markets') {
-    const dataSet_1 = await readImg(img, 350, 815, 80, 180)
-    const dataSet_2 = await readImg(img, 600, 815, 80, 180)
-    const dataSet_3 = await readImg(img, 815, 815, 110, 150)
-    const dataSet_4 = await readImg(img, 1050, 815, 130, 110)
-    const dataSet_5 = await readImg(img, 1300, 815, 120, 150)
-    const text = dataSet_1.concat(dataSet_2, dataSet_3, dataSet_4, dataSet_5)
-    const dirtyArr = text.split(/\r?\n/)
-    const arr = dirtyArr.filter(e => e !== '')
+    const rectangles = [
+      // First row of Markets
+      { left: 350, top: 815, width: 80, height: 35 },
+      { left: 350, top: 850, width: 80, height: 35 },
+      { left: 350, top: 887, width: 80, height: 35 },
+      { left: 350, top: 925, width: 80, height: 35 },
+      { left: 350, top: 961, width: 80, height: 35 },
+      // Second row of Markets
+      { left: 590, top: 815, width: 90, height: 35 },
+      { left: 590, top: 850, width: 90, height: 35 },
+      { left: 590, top: 887, width: 90, height: 35 },
+      { left: 590, top: 925, width: 90, height: 35 },
+      { left: 590, top: 961, width: 90, height: 35 },
+      // Third row of Markets
+      { left: 811, top: 815, width: 135, height: 35 },
+      { left: 811, top: 850, width: 135, height: 35 },
+      { left: 811, top: 887, width: 135, height: 35 },
+      { left: 811, top: 925, width: 135, height: 35 },
+      // Fourth row of Markets
+      { left: 1048, top: 815, width: 150, height: 35 },
+      { left: 1048, top: 850, width: 150, height: 35 },
+      { left: 1048, top: 887, width: 150, height: 35 },
+      // Fifth row of Markets
+      { left: 1300, top: 815, width: 140, height: 35 },
+      { left: 1300, top: 850, width: 140, height: 35 },
+      { left: 1300, top: 887, width: 140, height: 35 },
+      { left: 1300, top: 925, width: 140, height: 35 }
+    ]
+    for (let i = 0; i < rectangles.length; i++) {
+      textArray.push(await readImg(img, rectangles[i]))
+    }
+    console.log(textArray)
 
-    info.drivability = checkValidity(arr[0])
-    info.sportiness = checkValidity(arr[1])
-    info.comfort = checkValidity(arr[2])
-    info.prestige = checkValidity(arr[3])
-    info.safety = checkValidity(arr[4])
-    info.practicality = checkValidity(arr[5])
-    info.utility = checkValidity(arr[6])
-    info.offroad = checkValidity(arr[7])
-    info.reliability = checkValidity(arr[8])
-    info.environmentalResistance = checkValidity(arr[9])
-    info.footprint = checkValidity(parseFloat(arr[10]), 10)
-    info.cargoVolume = parseInt(arr[11])
-    info.passengerVolume = parseInt(arr[12])
-    info.serviceCosts = checkValidity(parseFloat(arr[13]), 5000, 10)
-    info.fuelEconomy = checkValidity(parseFloat(arr[14]), 30)
-    info.emissions = arr[15]
-    info.octane = arr[16]
-    info.materialCosts = parseInt(arr[17])
-    info.productionUnits = checkValidity(arr[18], 150)
-    info.engineeringUnits = checkValidity(arr[19], 150)
-    info.aproximateCost = arr[20]
+    newState.drivability.value = checkValidity(textArray[0])
+    newState.sportiness.value = checkValidity(textArray[1])
+    newState.comfort.value = checkValidity(textArray[2])
+    newState.prestige.value = checkValidity(textArray[3])
+    newState.safety.value = checkValidity(textArray[4])
+    newState.practicality.value = checkValidity(textArray[5])
+    newState.utility.value = checkValidity(textArray[6])
+    newState.offroad.value = checkValidity(textArray[7])
+    newState.reliability.value = checkValidity(textArray[8])
+    newState.environmentalResistance.value = checkValidity(textArray[9])
+    newState.footprint.value = checkValidity(parseFloat(textArray[10]), 10)
+    newState.cargoVolume.value = parseInt(textArray[11])
+    newState.passengerVolume.value = parseInt(textArray[12])
+    newState.serviceCosts.value = checkValidity(parseFloat(textArray[13]), 5000, 10)
+    newState.fuelEconomy.value = checkValidity(parseFloat(textArray[14]), 30)
+    newState.emissions.value = textArray[15]
+    newState.octane.value = textArray[16]
+    newState.materialCosts.value = parseInt(textArray[17])
+    newState.productionUnits.value = checkValidity(textArray[18], 150)
+    newState.engineeringUnits.value = checkValidity(textArray[19], 150)
+    newState.aproximateCost.value = textArray[20]
   }
 
   if (imageType === 'Test Track') {
-    const dataSet_1 = await readImg(img, 240, 815, 120, 180)
-    const dataSet_2 = await readImg(img, 510, 815, 120, 110)
-    const dataSet_3 = await readImg(img, 770, 815, 120, 150)
-    const dataSet_4 = await readImg(img, 1050, 815, 120, 150)
-    const dataSet_5 = await readImg(img, 1270, 815, 170, 180)
-    const text = dataSet_1.concat(dataSet_2, dataSet_3, dataSet_4, dataSet_5)
-    const dirtyArr = text.split(/\r?\n/)
-    const arr = dirtyArr.filter(e => e !== '')
+    const rectangles = [
+      // First row of Test track
+      { left: 230, top: 815, width: 145, height: 35 },
+      { left: 230, top: 850, width: 145, height: 35 },
+      { left: 230, top: 887, width: 145, height: 35 },
+      { left: 230, top: 925, width: 145, height: 35 },
+      { left: 230, top: 961, width: 145, height: 35 },
+      // Second row of Test track
+      { left: 490, top: 815, width: 145, height: 35 },
+      { left: 490, top: 850, width: 145, height: 35 },
+      { left: 490, top: 887, width: 145, height: 35 },
+      // Third row of Test track
+      { left: 765, top: 815, width: 130, height: 35 },
+      { left: 765, top: 850, width: 130, height: 35 },
+      { left: 765, top: 887, width: 130, height: 35 },
+      { left: 765, top: 925, width: 130, height: 35 },
+      // Fourth row of Test track
+      { left: 1025, top: 815, width: 135, height: 35 },
+      { left: 1025, top: 850, width: 135, height: 35 },
+      { left: 1025, top: 887, width: 135, height: 35 },
+      { left: 1025, top: 925, width: 135, height: 35 },
+      // Fifth row of Test track
+      { left: 1255, top: 815, width: 200, height: 35 },
+      { left: 1255, top: 850, width: 200, height: 35 },
+      { left: 1255, top: 887, width: 200, height: 35 },
+      { left: 1255, top: 925, width: 200, height: 35 },
+      { left: 1255, top: 961, width: 200, height: 35 }
+    ]
+    for (let i = 0; i < rectangles.length; i++) {
+      textArray.push(await readImg(img, rectangles[i]))
+    }
+    console.log(textArray)
 
-    info.topSpeed = checkValidity(arr[0])
-    info.acceleration = checkValidity(arr[1], 30)
-    info.speedingUp = checkValidity(parseFloat(arr[2]))
-    info.oneFourthMileTime = checkValidity(parseFloat(arr[3]), null, 100)
-    info.oneKMTime = checkValidity(parseFloat(arr[4]), null, 100)
-    info.twentyMG = checkValidity(parseFloat(arr[5]), 10, 1000)
-    info.twohundredMG = checkValidity(parseFloat(arr[6]), 10, 1000)
-    info.rollAngle = checkValidity(parseFloat(arr[7]), 15)
-    info.brakingDistance = checkValidity(parseFloat(arr[8]))
-    info.breakeFadeD = checkValidity(parseFloat(arr[9]), 10, 10)
-    info.breakeFadeS = checkValidity(parseFloat(arr[10]), 10, 10)
-    info.breakeFadeU = checkValidity(parseFloat(arr[11]), 10, 10)
-    info.frontalArea = parseFloat(arr[12])
-    info.totalCoeficientOfDrag = parseFloat(arr[13])
-    info.frontDownforce = checkValidity(parseFloat(arr[14]), 500, 10)
-    info.rearDownforce = checkValidity(parseFloat(arr[15]), 500, 10)
-    info.powerToWeight = checkValidity(parseFloat(arr[18]), 1, 1000)
-    info.towCapacity = parseFloat(arr[19])
-    info.loadCapacity = checkValidity(parseFloat(arr[20]), 2500, 10)
+    newState.topSpeed.value = checkValidity(textArray[0])
+    newState.acceleration.value = checkValidity(textArray[1], 30)
+    newState.speedingUp.value = checkValidity(parseFloat(textArray[2]))
+    newState.oneFourthMileTime.value = checkValidity(parseFloat(textArray[3]), null, 100)
+    newState.oneKMTime.value = checkValidity(parseFloat(textArray[4]), null, 100)
+    newState.twentyMG.value = checkValidity(parseFloat(textArray[5]), 10, 1000)
+    newState.twohundredMG.value = checkValidity(parseFloat(textArray[6]), 10, 1000)
+    newState.rollAngle.value = checkValidity(parseFloat(textArray[7]), 15)
+    newState.brakingDistance.value = checkValidity(parseFloat(textArray[8]))
+    newState.breakeFadeD.value = checkValidity(parseFloat(textArray[9]), 10, 10)
+    newState.breakeFadeS.value = checkValidity(parseFloat(textArray[10]), 10, 10)
+    newState.breakeFadeU.value = checkValidity(parseFloat(textArray[11]), 10, 10)
+    newState.frontalArea.value = parseFloat(textArray[12])
+    newState.totalCoeficientOfDrag.value = parseFloat(textArray[13])
+    newState.frontDownforce.value = checkValidity(parseFloat(textArray[14]), 500, 10)
+    newState.rearDownforce.value = checkValidity(parseFloat(textArray[15]), 500, 10)
+    newState.powerToWeight.value = checkValidity(parseFloat(textArray[18]), 1, 1000)
+    newState.towCapacity.value = parseFloat(textArray[19])
+    newState.loadCapacity.value = checkValidity(parseFloat(textArray[20]), 2500, 10)
   }
-  return info
+  return updateObject(state, newState)
 }
 
 export {
