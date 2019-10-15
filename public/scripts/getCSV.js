@@ -7,7 +7,6 @@ const getCSV = async (data, opts) => {
     }, {});
   const parser = new json2csv.Parser(opts)
   const csv = parser.parse(pairs);
-  console.log(csv)
   return csv
 }
 

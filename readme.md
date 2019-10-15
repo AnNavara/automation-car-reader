@@ -1,7 +1,7 @@
-### Left to do
- * Sorting of items
+### Things to do
+ * Detect image by color - DONE!
  * Combining of similar stats
  * Better styling
- * Omni 
+ * Remove some words as of "CSC, CSR, AGC, FUA" 
  * Change of titles
  * Presets

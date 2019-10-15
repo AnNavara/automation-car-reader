@@ -1,7 +1,6 @@
-import { state } from './main.js'
 import { readImg } from './readImg.js'
 
-const getVehicleData = async (img) => {
+const getVehicleData = async (img, imageType) => {
   const info = {}
 
   const checkValidity = (data, check = 100, delimiter = 10) => {
@@ -12,10 +11,33 @@ const getVehicleData = async (img) => {
     return numberData
   }
 
-  if (state.lastFileName === '1.png') {
-    const dataSet_1 = await readImg(img, 100, 750, 750, 270)
-    const dataSet_2 = await readImg(img, 850, 750, 650, 270)
-    const text = dataSet_1 + dataSet_2
+  if (imageType === 'Design') {
+    let text = ''
+    const sizes = [
+      // Left side of the Design
+      { left: 160, top: 753, width: 600, height: 33 },
+      { left: 160, top: 806, width: 600, height: 30 },
+      { left: 160, top: 834, width: 600, height: 30 },
+      { left: 160, top: 865, width: 600, height: 30 },
+      { left: 160, top: 894, width: 600, height: 30 },
+      { left: 160, top: 924, width: 600, height: 30 },
+      { left: 160, top: 954, width: 600, height: 30 },
+      { left: 160, top: 985, width: 600, height: 30 },
+      // Right side of the Design
+      { left: 865, top: 753, width: 600, height: 33 },
+      { left: 865, top: 806, width: 600, height: 30 },
+      { left: 865, top: 834, width: 600, height: 30 },
+      { left: 865, top: 865, width: 600, height: 30 },
+      { left: 865, top: 894, width: 600, height: 30 },
+      { left: 865, top: 924, width: 600, height: 30 },
+      { left: 865, top: 954, width: 600, height: 30 },
+      { left: 865, top: 985, width: 600, height: 30 }
+    ]
+    for (let i = 0; i < sizes.length; i++) {
+      text += await readImg(img, sizes[i])
+    }
+    console.log(text)
+
 
     const arr = text.split(/\r?\n/)
     info.company = arr[0].split('-')[0].trim()
@@ -67,7 +89,7 @@ const getVehicleData = async (img) => {
     })
   }
 
-  if (state.lastFileName === '2.png') {
+  if (imageType === 'Markets') {
     const dataSet_1 = await readImg(img, 350, 815, 80, 180)
     const dataSet_2 = await readImg(img, 600, 815, 80, 180)
     const dataSet_3 = await readImg(img, 815, 815, 110, 150)
@@ -100,7 +122,7 @@ const getVehicleData = async (img) => {
     info.aproximateCost = arr[20]
   }
 
-  if (state.lastFileName === '3.png') {
+  if (imageType === 'Test Track') {
     const dataSet_1 = await readImg(img, 240, 815, 120, 180)
     const dataSet_2 = await readImg(img, 510, 815, 120, 110)
     const dataSet_3 = await readImg(img, 770, 815, 120, 150)

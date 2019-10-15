@@ -1,5 +1,6 @@
 import { getInitialState } from './getInitalState.js'
 import renderControls from './controls.js'
+import { detectImage } from './detectImage.js'
 import { getVehicleData } from './vehicleData.js'
 import getCSV from './getCSV.js'
 import { updateObject } from './utility.js'
@@ -16,11 +17,16 @@ let state = {}
 const readFile = () => {
   const reader = new FileReader()
   reader.addEventListener('load', async () => {
-    state.lastFileName = input.files[0].name
-    const newData = await getVehicleData(reader.result)
-    Object.keys(newData).forEach(key => state[key].value = newData[key])
-    storeLocal('state', JSON.stringify(state))
-    displayCarData()
+    try {
+      const imageType = await detectImage(reader.result)
+      const newData = await getVehicleData(reader.result, imageType)
+      Object.keys(newData).forEach(key => state[key].value = newData[key])
+      storeLocal('state', JSON.stringify(state))
+      displayCarData()
+    } catch (err) {
+      console.log(err)
+      document.querySelector('.Instruction').textContent = err
+    }
   })
   reader.readAsDataURL(input.files[0])
 }
@@ -81,21 +87,12 @@ const displayCarData = () => {
       obj[key] = state[key].value;
       return obj;
     }, {});
-  if (Object.entries(carData).length !== 0 && carData.constructor === Object) {
-    textEl.value = JSON.stringify(carData, null, 2)
-  }
+  Object.entries(carData).length !== 0 && carData.constructor === Object ? textEl.value = JSON.stringify(carData, null, 2) : textEl.value = ''
 }
 
 const clearCarData = () => {
-  const updatedState = Object.keys(state)
-    .filter(key => state[key].value)
-    .reduce((obj, key) => {
-      obj[key] = state[key].value;
-      return obj;
-    }, {});
   Object.keys(state).forEach(key => {
-    if (state[key].value) {
-      console.log(state[key].value)
+    if (state[key].value !== null) {
       state[key].value = null
     }
   })
