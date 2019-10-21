@@ -1,6 +1,7 @@
 const progress = document.querySelector('#Progress')
 let workerId = ''
 let workerCount = 0
+let jobs = document.querySelector('#Jobs').textContent
 
 const recognize = async data => {
   const { data: { text } } = await Tesseract.recognize(data, 'eng', {
@@ -20,6 +21,7 @@ const recognize = async data => {
       } else if (m.status === 'loading tesseract core') {
         if (workerId !== m.workerId && m.workerId !== undefined) {
           workerId = m.workerId
+          if (jobs <= workerCount) workerCount = 0
         }
         progress.innerHTML = `...Loading - ${workerCount}`
       }

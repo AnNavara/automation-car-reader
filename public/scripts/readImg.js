@@ -1,8 +1,8 @@
 import recognize from './recognize.js';
-import { updateObject } from './utility.js'
 
-const readImg = async (file, size, field, state) => {
-  const obj = { ...state }
+const readImg = async (file, size, field) => {
+  const obj = {}
+  obj[field] = {}
   const data = await jimp.read(file)
     .then(result => {
       const mime = jimp.MIME_PNG
@@ -22,8 +22,8 @@ const readImg = async (file, size, field, state) => {
     })
     .catch(err => { throw new Error(err) })
 
-  obj[field].search.read = await recognize(data, size)
-  return updateObject(state, obj)
+  obj[field].read = await recognize(data, size)
+  return obj
 }
 
 export {

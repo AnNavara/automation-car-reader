@@ -6,6 +6,7 @@ const JobsEl = document.querySelector('#Jobs')
 
 const getVehicleData = async (img, imageType) => {
   let newState = { ...state }
+  let info = {}
 
   const checkValidity = (data, check = 100, delimiter = 10) => {
     const numberData = parseFloat(data)
@@ -39,7 +40,7 @@ const getVehicleData = async (img, imageType) => {
 
   const runRead = async rectangles => {
     for (let i = 0; i < rectangles.length; i++) {
-      newState = updateObject(newState, await readImg(img, rectangles[i].rectangle, rectangles[i].id, newState))
+      info = updateObject(info, await readImg(img, rectangles[i].rectangle, rectangles[i].id, newState))
     }
   }
 
@@ -48,10 +49,14 @@ const getVehicleData = async (img, imageType) => {
     JobsEl.textContent = ' / ' + renctanglesArr.length
     await runRead(renctanglesArr)
 
+    //
+    // This is hell
+    // 
+
     // ADD Check for CSR/CSC/3 Letter Skip
     // Maybe join together model and company
     const exclude = ['CSR', 'CSC']
-    const split = newState.company.search.read.split('-')
+    const split = info.company.read.split('-')
     const read = split.filter(str => {
       let r = false
       exclude.forEach(ex => {
@@ -64,35 +69,52 @@ const getVehicleData = async (img, imageType) => {
 
     // Doors and Seats
     // Fix for +2
-    newState.doorCount.value = checkValidity(newState.doorCount.search.read.split(' ')[1])
-    newState.seatCount.value = checkValidity(newState.doorCount.search.read.split(' ')[4].replace('/0', ''))
+    //.replace(/(\/|\n)/gm, '')
+    newState.doorCount.value = checkValidity(info.doorCount.read.split(' ')[1])
+    newState.seatCount.value = checkValidity(info.doorCount.read.split(' ')[4].replace('/0', ''))
     // Wheelbase, Length, Width
-    newState.wheelbase.value = checkValidity(parseFloat(newState.wheelbase.search.read.split(' ')[5]), 100, 100)
-    newState.length.value = checkValidity(parseFloat(newState.wheelbase.search.read.split(' ')[7]), 100, 100)
-    // I do not know how does this matching pattern works
-    newState.width.value = checkValidity(parseFloat(newState.wheelbase.search.read.split(' ')[8].replace(/(\/)()/, '')), 100, 100)
+    const wheelbaseRegex = new RegExp('(Wheelbase|Length|Width|:|\/)', 'gm')
+    const wheelbaseData = info.wheelbase.read.replace(wheelbaseRegex, '').trim().split(' ').filter(e => e !== '')
+    newState.wheelbase.value = checkValidity(wheelbaseData[0], 100, 100)
+    newState.length.value = checkValidity(wheelbaseData[1], 100, 100)
+    newState.width.value = checkValidity(wheelbaseData[2], 100, 100)
     // Drivetrain 
-    newState.enginePosition.value = [newState.enginePosition.search.read.split(' ')[1], newState.enginePosition.search.read.split(' ')[2]].join(' ')
-    newState.driveType.value = newState.enginePosition.search.read.split(' ')[4]
+    newState.enginePosition.value = [info.enginePosition.read.split(' ')[1], info.enginePosition.read.split(' ')[2]].join(' ')
+    newState.driveType.value = info.enginePosition.read.split(' ')[4]
     // Gearbox 
-    newState.gearbox.value = newState.gearbox.search.read.split(' ').length > 4 ? [newState.gearbox.search.read.split(' ')[3], newState.gearbox.search.read.split(' ')[4]].join(' ') : newState.gearbox.search.read.split(' ')[3]
-    newState.gears.value = parseInt(newState.gearbox.search.read.split(' ')[1])
+    newState.gearbox.value = info.gearbox.read.split(' ').length > 4 ? [info.gearbox.read.split(' ')[3], info.gearbox.read.split(' ')[4]].join(' ') : newState.gearbox.search.read.split(' ')[3]
+    newState.gears.value = parseInt(info.gearbox.read.split(' ')[1])
     // Weight
-    newState.weight.value = parseInt(newState.weight.search.read.split(' ')[1])
+    newState.weight.value = parseInt(info.weight.read.split(' ')[1])
     // Power
-    newState.powerPeak.value = parseFloat(newState.powerPeak.search.read.split(' ')[1])
-    newState.powerPeakRev.value = parseInt(newState.powerPeak.search.read.split(' ')[4])
-    newState.redline.value = parseInt(newState.redline.search.read.split(' ')[1].replace(/\D/, ''))
+    newState.powerPeak.value = checkValidity(info.powerPeak.read.split(' ')[1], 1000, 10)
+    newState.powerPeakRev.value = parseInt(info.powerPeak.read.split(' ')[4])
+    newState.redline.value = parseInt(info.redline.read.split(' ')[1].replace(/\D/, ''))
     // Bottom
-    newState.displacement.value = parseInt(newState.displacement.search.read.split(' ')[3])
-    newState.cylinderArrangement.value = newState.displacement.search.read.split(' ')[4].replace(/\d/g, '')
-    newState.cylinderCount.value = parseInt(newState.displacement.search.read.split(' ')[4].replace(/\D/g, ''))
+    const replaceBottom = new RegExp('(Bottom End:|Cast Iron|Aluminium|AlSi|AISi)', 'gm')
+    const volumeMeasurments = ['cc', 'ci']
+    newState.displacement.value = parseInt(info.displacement.read.split(' ').filter(e => {
+      let r = false
+      volumeMeasurments.forEach(ex => {
+        if (e.includes(ex)) { r = true }
+      })
+      return r
+    }).join(' '))
+    newState.cylinderArrangement.value = info.displacement.read.replace(replaceBottom, '').split(' ').filter(e => {
+      let r = false
+      volumeMeasurments.forEach(ex => {
+        if (e.includes(ex)) { r = true }
+      })
+      return !r
+    }).join(' ').trim()
+    // newState.cylinderCount.value = parseInt(info.displacement.read.replace(replaceBottom, ''))
     // Top
-    newState.valvetrain.value = newState.valvetrain.search.read.split(' ')[3].split('-')[0]
-    newState.valveNumber.value = parseInt(newState.valvetrain.search.read.split(' ')[3].split('-')[1])
+    const topEndRegex = new RegExp('(Top End:|Cast Iron|Aluminium|AlSi|AISi)', 'gm')
+    newState.valvetrain.value = info.valvetrain.read.replace(topEndRegex, '').trim()
+    // newState.valveNumber.value = parseInt(info.valvetrain.read.split(' ')[3].split('-')[1])
     // Fuel
-    newState.aspiration.value = [newState.aspiration.search.read.split(' ')[2], newState.aspiration.search.read.split(' ')[3]].join(' ')
-    newState.fuelSystem.value = [...newState.aspiration.search.read.split(' ').splice(4)].join(' ')
+    newState.aspiration.value = [info.aspiration.read.split(' ')[2], info.aspiration.read.split(' ')[3]].join(' ')
+    newState.fuelSystem.value = [...info.aspiration.read.split(' ').splice(4)].join(' ')
   }
 
   if (imageType === 'Markets') {
@@ -101,7 +123,7 @@ const getVehicleData = async (img, imageType) => {
     await runRead(renctanglesArr)
 
     newState.drivability.value = checkValidity(newState.drivability.search.read)
-    newState.sportiness.value = checkValidity(newState.sportiness.search.read)
+    newState.sportiness.value = checkValidity(newState.sportiness.search.read, 50)
     newState.comfort.value = checkValidity(newState.comfort.search.read)
     newState.prestige.value = checkValidity(newState.prestige.search.read)
     newState.safety.value = checkValidity(newState.safety.search.read)
@@ -149,6 +171,7 @@ const getVehicleData = async (img, imageType) => {
     newState.loadCapacity.value = checkValidity(newState.loadCapacity.search.read, 2500, 10)
   }
 
+  updateObject(newState, info)
   return newState
 }
 

@@ -103,7 +103,7 @@ body {
 }
 
 .content__controls *:first-child {
-  margin-right: 58px;
+  margin-right: 82px;
 }
 
 .content__controls *:nth-child(2) {
@@ -123,6 +123,7 @@ body {
 }
 
 .img img {
+  max-width: 450px;
   object-fit: contain;
 }
 

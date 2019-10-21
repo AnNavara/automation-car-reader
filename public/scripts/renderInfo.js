@@ -24,7 +24,7 @@ export const renderInfo = (state, checkboxChange, inputChange) => {
     title.id = e.id
     value.value = e.config.value === undefined ? null : e.config.value
     value.id = e.id
-    img.src = e.config.img ? e.config.img : null
+    img.src = e.config.img ? e.config.img : ''
     e.config.img ? imgEl.appendChild(img) : null
     title.addEventListener('change', event => {
       inputChange(event.target.id, event.target.value, 'title')

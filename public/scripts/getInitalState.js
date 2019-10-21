@@ -7,7 +7,7 @@ export const getInitialState = function () {
         placeholder: 'Export with Header'
       },
       checked: true,
-      title: ''
+      title: 'Export with header'
     },
     company: {
       pageType: 'Design',
@@ -199,15 +199,15 @@ export const getInitialState = function () {
       checked: true,
       title: 'Cylinder Arrangement'
     },
-    cylinderCount: {
-      pageType: 'Design',
-      elementConfig: {
-        type: 'checkbox',
-        placeholder: 'Number of cyliners'
-      },
-      checked: true,
-      title: 'Cylinders'
-    },
+    // cylinderCount: {
+    //   pageType: 'Design',
+    //   elementConfig: {
+    //     type: 'checkbox',
+    //     placeholder: 'Number of cyliners'
+    //   },
+    //   checked: true,
+    //   title: 'Cylinders'
+    // },
     valvetrain: {
       pageType: 'Design',
       elementConfig: {
@@ -220,15 +220,15 @@ export const getInitialState = function () {
       checked: true,
       title: 'Valvetrain'
     },
-    valveNumber: {
-      pageType: 'Design',
-      elementConfig: {
-        type: 'checkbox',
-        placeholder: 'Valve Number'
-      },
-      checked: true,
-      title: 'Valve Number'
-    },
+    // valveNumber: {
+    //   pageType: 'Design',
+    //   elementConfig: {
+    //     type: 'checkbox',
+    //     placeholder: 'Valve Number'
+    //   },
+    //   checked: true,
+    //   title: 'Valve Number'
+    // },
     aspiration: {
       pageType: 'Design',
       elementConfig: {

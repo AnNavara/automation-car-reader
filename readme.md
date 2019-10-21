@@ -1,7 +1,8 @@
+### Link
+[Car reader at heroku](https://navara-car-reader.herokuapp.com)
+
 ### Things to do
- * Detect image by color - DONE!
- * Combining of similar stats
- * Better styling
- * Remove some words as of "CSC, CSR, AGC, FUA" 
- * Change of titles
- * Presets
+ * Multiple upload
+ * Fix display of progress
+ * Input ot update removem words as of "CSC, CSR, AGC, FUA"
+ * Saving presets

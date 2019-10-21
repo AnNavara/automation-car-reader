@@ -9,6 +9,7 @@ const downloadEl = document.getElementById('Download')
 const resultEl = document.querySelector('.result')
 const btnClearSettings = document.querySelector('.clearSettings')
 const clearCarBtn = document.getElementById('Clear')
+const btnReset = document.querySelector('#reset')
 
 let state = {}
 
@@ -112,11 +113,17 @@ const clearCarData = () => {
 
 clearCarBtn.addEventListener('click', () => { clearCarData() })
 
+btnReset.addEventListener('click', () => { 
+  clearStore('state') 
+  state = getInitialState()
+  renderInfo()
+})
+
 window.onload = async () => {
-  initialiseState()
-  displayInfo()
-  createDownload('text/csv')
-}
+    initialiseState()
+    displayInfo()
+    createDownload('text/csv')
+  }
 
 export {
   state
