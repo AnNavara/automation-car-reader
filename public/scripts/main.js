@@ -47,7 +47,9 @@ const storeLocal = (id, data) => localStorage.setItem(id, data)
 const clearStore = id => localStorage.removeItem(id)
 
 const createDownload = async (type) => {
-  if (Object.entries(state).filter(e => e.value).length <= 1) return
+  if ((Object.entries(state).filter(e => e[1].value).length) <= 1) {
+    return
+  }
   downloadEl.innerHTML = ''
   const options = {
     header: state.saveHeader.checked
@@ -113,17 +115,17 @@ const clearCarData = () => {
 
 clearCarBtn.addEventListener('click', () => { clearCarData() })
 
-btnReset.addEventListener('click', () => { 
-  clearStore('state') 
+btnReset.addEventListener('click', () => {
+  clearStore('state')
   state = getInitialState()
   renderInfo()
 })
 
 window.onload = async () => {
-    initialiseState()
-    displayInfo()
-    createDownload('text/csv')
-  }
+  initialiseState()
+  displayInfo()
+  createDownload('text/csv')
+}
 
 export {
   state
