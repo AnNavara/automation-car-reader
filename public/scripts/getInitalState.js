@@ -1,4 +1,4 @@
-export const getInitialState = () => {
+export const getInitialState = function () {
   return {
     saveHeader: {
       pageType: 'Helper',
@@ -15,6 +15,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Company name'
       },
+      search: {
+        rectangle: { left: 160, top: 753, width: 600, height: 33 },
+      },
       checked: true,
       title: 'Company'
     },
@@ -23,6 +26,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Model name'
+      },
+      search: {
+        bound: 'company'
       },
       checked: true,
       title: 'Model'
@@ -33,9 +39,12 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Number of Doors'
       },
+      search: {
+        rectangle: { left: 160, top: 806, width: 600, height: 30 },
+        bound: ['seatCount']
+      },
       checked: false,
-      title: 'Doors',
-      value: ''
+      title: 'Doors'
     },
     seatCount: {
       pageType: 'Design',
@@ -43,15 +52,21 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Number of Seats'
       },
+      search: {
+        bound: 'seatCount'
+      },
       checked: true,
-      title: 'Seats',
-      value: ''
+      title: 'Seats'
     },
     wheelbase: {
       pageType: 'Design',
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Wheelbase'
+      },
+      search: {
+        rectangle: { left: 160, top: 834, width: 600, height: 30 },
+        bound: ['length', 'width']
       },
       checked: false,
       title: 'Wheelbase'
@@ -80,6 +95,10 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Engine Position'
       },
+      search: {
+        rectangle: { left: 160, top: 894, width: 600, height: 30 },
+        bound: ['driveType']
+      },
       checked: false,
       title: 'Engine Position'
     },
@@ -97,6 +116,10 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Gearbox'
+      },
+      search: {
+        rectangle: { left: 160, top: 924, width: 600, height: 30 },
+        bound: ['gears']
       },
       checked: true,
       title: 'Gearbox'
@@ -116,6 +139,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Weight'
       },
+      search: {
+        rectangle: { left: 160, top: 985, width: 600, height: 30 }
+      },
       checked: true,
       title: 'Weight'
     },
@@ -124,6 +150,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Power'
+      },
+      search: {
+        rectangle: { left: 865, top: 806, width: 600, height: 30 }
       },
       checked: true,
       title: 'Power'
@@ -143,6 +172,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Redline'
       },
+      search: {
+        rectangle: { left: 865, top: 834, width: 600, height: 30 }
+      },
       checked: false,
       title: 'Redline'
     },
@@ -151,6 +183,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Displacement'
+      },
+      search: {
+        rectangle: { left: 865, top: 865, width: 600, height: 30 }
       },
       checked: true,
       title: 'Displacement'
@@ -179,6 +214,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Valvetrain'
       },
+      search: {
+        rectangle: { left: 865, top: 894, width: 600, height: 30 }
+      },
       checked: true,
       title: 'Valvetrain'
     },
@@ -196,6 +234,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Aspiration'
+      },
+      search: {
+        rectangle: { left: 865, top: 954, width: 600, height: 30 }
       },
       checked: true,
       title: 'Aspiration'
@@ -215,6 +256,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Drivability'
       },
+      search: {
+        rectangle: { left: 350, top: 815, width: 80, height: 35 }
+      },
       checked: true,
       title: 'Drivability'
     },
@@ -223,6 +267,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Sportiness'
+      },
+      search: {
+        rectangle: { left: 350, top: 850, width: 80, height: 35 }
       },
       checked: true,
       title: 'Sportiness'
@@ -233,6 +280,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Comfort'
       },
+      search: {
+        rectangle: { left: 350, top: 887, width: 80, height: 35 }
+      },
       checked: true,
       title: 'Comfort'
     },
@@ -241,6 +291,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Prestige'
+      },
+      search: {
+        rectangle: { left: 350, top: 925, width: 80, height: 35 }
       },
       checked: false,
       title: 'Prestige'
@@ -251,6 +304,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Safety'
       },
+      search: {
+        rectangle: { left: 350, top: 961, width: 80, height: 35 }
+      },
       checked: true,
       title: 'Safety'
     },
@@ -259,6 +315,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Practicality'
+      },
+      search: {
+        rectangle: { left: 590, top: 815, width: 90, height: 35 }
       },
       checked: false,
       title: 'Practicality'
@@ -269,6 +328,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Utility'
       },
+      search: {
+        rectangle: { left: 590, top: 850, width: 90, height: 35 }
+      },
       checked: false,
       title: 'Utility'
     },
@@ -277,6 +339,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Offroad'
+      },
+      search: {
+        rectangle: { left: 590, top: 887, width: 90, height: 35 }
       },
       checked: false,
       title: 'Offroad'
@@ -287,6 +352,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Reliability'
       },
+      search: {
+        rectangle: { left: 590, top: 925, width: 90, height: 35 }
+      },
       checked: true,
       title: 'Reliability'
     },
@@ -295,6 +363,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Environmental Resistance'
+      },
+      search: {
+        rectangle: { left: 590, top: 961, width: 90, height: 35 }
       },
       checked: false,
       title: 'Environmental Resistance'
@@ -305,6 +376,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Footprint'
       },
+      search: {
+        rectangle: { left: 811, top: 815, width: 135, height: 35 }
+      },
       checked: false,
       title: 'Footprint'
     },
@@ -313,6 +387,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Cargo Volume'
+      },
+      search: {
+        rectangle: { left: 811, top: 850, width: 135, height: 35 }
       },
       checked: false,
       title: 'Cargo Volume'
@@ -323,6 +400,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Passenger Volume'
       },
+      search: {
+        rectangle: { left: 811, top: 887, width: 135, height: 35 }
+      },
       checked: false,
       title: 'Passenger Volume'
     },
@@ -331,6 +411,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Service Costs'
+      },
+      search: {
+        rectangle: { left: 811, top: 925, width: 135, height: 35 }
       },
       checked: false,
       title: 'Service Costs'
@@ -341,6 +424,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Fuel Economy'
       },
+      search: {
+        rectangle: { left: 1048, top: 815, width: 150, height: 35 }
+      },
       checked: true,
       title: 'Fuel Economy'
     },
@@ -349,6 +435,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Emissions'
+      },
+      search: {
+        rectangle: { left: 1048, top: 850, width: 150, height: 35 }
       },
       checked: false,
       title: 'Emissions'
@@ -359,6 +448,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Octane'
       },
+      search: {
+        rectangle: { left: 1048, top: 887, width: 150, height: 35 }
+      },
       checked: false,
       title: 'Octane'
     },
@@ -367,6 +459,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Material Costs'
+      },
+      search: {
+        rectangle: { left: 1300, top: 815, width: 140, height: 35 }
       },
       checked: false,
       title: 'Material Costs'
@@ -377,6 +472,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Production Units'
       },
+      search: {
+        rectangle: { left: 1300, top: 850, width: 140, height: 35 }
+      },
       checked: true,
       title: 'Production Units'
     },
@@ -385,6 +483,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Engineering Units'
+      },
+      search: {
+        rectangle: { left: 1300, top: 887, width: 140, height: 35 }
       },
       checked: true,
       title: 'Engineering Units'
@@ -395,6 +496,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Aproximate Cost'
       },
+      search: {
+        rectangle: { left: 1300, top: 925, width: 140, height: 35 }
+      },
       checked: false,
       title: 'Aproximate Cost'
     },
@@ -403,6 +507,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Top Speed'
+      },
+      search: {
+        rectangle: { left: 230, top: 815, width: 145, height: 35 }
       },
       checked: true,
       title: 'Top Speed'
@@ -413,6 +520,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Acceleration from standstill'
       },
+      search: {
+        rectangle: { left: 230, top: 850, width: 145, height: 35 }
+      },
       checked: true,
       title: 'Acceleration from standstill'
     },
@@ -421,6 +531,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Speeding Up'
+      },
+      search: {
+        rectangle: { left: 230, top: 887, width: 145, height: 35 }
       },
       checked: true,
       title: 'Speeding Up'
@@ -431,6 +544,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: '1/4 Mile Time'
       },
+      search: {
+        rectangle: { left: 230, top: 925, width: 145, height: 35 }
+      },
       checked: false,
       title: '1/4 Mile Time'
     },
@@ -439,6 +555,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: '1 km Time'
+      },
+      search: {
+        rectangle: { left: 230, top: 961, width: 145, height: 35 }
       },
       checked: false,
       title: '1 km Time'
@@ -449,6 +568,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: '20 m G force'
       },
+      search: {
+        rectangle: { left: 490, top: 815, width: 145, height: 35 }
+      },
       checked: false,
       title: '20 m G force'
     },
@@ -457,6 +579,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: '200 m G force'
+      },
+      search: {
+        rectangle: { left: 490, top: 850, width: 145, height: 35 }
       },
       checked: false,
       title: '200 m G force'
@@ -467,6 +592,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Roll Angle'
       },
+      search: {
+        rectangle: { left: 490, top: 887, width: 145, height: 35 }
+      },
       checked: true,
       title: 'Roll Angle'
     },
@@ -475,6 +603,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Braking Distance'
+      },
+      search: {
+        rectangle: { left: 765, top: 815, width: 130, height: 35 }
       },
       checked: true,
       title: 'Braking Distance'
@@ -485,6 +616,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Brake fade Drivability'
       },
+      search: {
+        rectangle: { left: 765, top: 850, width: 130, height: 35 }
+      },
       checked: false,
       title: 'Brake fade Drivability'
     },
@@ -493,6 +627,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Brake fade Sportiness'
+      },
+      search: {
+        rectangle: { left: 765, top: 887, width: 130, height: 35 }
       },
       checked: false,
       title: 'Brake fade Sportiness'
@@ -503,6 +640,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Brake fade Utility'
       },
+      search: {
+        rectangle: { left: 765, top: 925, width: 130, height: 35 }
+      },
       checked: false,
       title: 'Brake fade Utility'
     },
@@ -511,6 +651,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Frontal Area'
+      },
+      search: {
+        rectangle: { left: 1025, top: 815, width: 135, height: 35 }
       },
       checked: false,
       title: 'Frontal Area'
@@ -521,6 +664,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Total Coeficient of Drag'
       },
+      search: {
+        rectangle: { left: 1025, top: 850, width: 135, height: 35 }
+      },
       checked: false,
       title: 'Total Coeficient of Drag'
     },
@@ -529,6 +675,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Front Downforce'
+      },
+      search: {
+        rectangle: { left: 1025, top: 887, width: 135, height: 35 }
       },
       checked: false,
       title: 'Front Downforce'
@@ -539,6 +688,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Rear Downforce'
       },
+      search: {
+        rectangle: { left: 1025, top: 925, width: 135, height: 35 }
+      },
       checked: false,
       title: 'Rear Downforce'
     },
@@ -547,6 +699,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Power to Weight'
+      },
+      search: {
+        rectangle: { left: 1255, top: 887, width: 200, height: 35 }
       },
       checked: false,
       title: 'Power to Weight'
@@ -557,6 +712,9 @@ export const getInitialState = () => {
         type: 'checkbox',
         placeholder: 'Tow Capacity'
       },
+      search: {
+        rectangle: { left: 1255, top: 925, width: 200, height: 35 }
+      },
       checked: false,
       title: 'Tow Capacity'
     },
@@ -565,6 +723,9 @@ export const getInitialState = () => {
       elementConfig: {
         type: 'checkbox',
         placeholder: 'Load Capacity'
+      },
+      search: {
+        rectangle: { left: 1255, top: 961, width: 200, height: 35 }
       },
       checked: false,
       title: 'Load Capacity'

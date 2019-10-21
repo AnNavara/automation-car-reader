@@ -1,16 +1,14 @@
 import { getInitialState } from './getInitalState.js'
-import renderControls from './controls.js'
 import { detectImage } from './detectImage.js'
 import { getVehicleData } from './vehicleData.js'
 import getCSV from './getCSV.js'
-import { updateObject } from './utility.js'
+import { renderInfo } from './renderInfo.js'
 
 const input = document.getElementById('File')
 const downloadEl = document.getElementById('Download')
-const textEl = document.getElementById('Text')
-const clearCarBtn = document.getElementById('Clear')
+const resultEl = document.querySelector('.result')
 const btnClearSettings = document.querySelector('.clearSettings')
-const controlsEl = document.querySelector('.controls')
+const clearCarBtn = document.getElementById('Clear')
 
 let state = {}
 
@@ -21,11 +19,11 @@ const readFile = () => {
       const imageType = await detectImage(reader.result)
       state = await getVehicleData(reader.result, imageType)
       storeLocal('state', JSON.stringify(state))
-      displayCarData()
+      displayInfo()
       createDownload('text/csv')
     } catch (err) {
       console.log(err)
-      document.querySelector('.Instruction').textContent = 'ERROR: ' + err
+      document.querySelector('.instruction').textContent = 'ERROR: ' + err
     }
   })
   reader.readAsDataURL(input.files[0])
@@ -48,6 +46,7 @@ const storeLocal = (id, data) => localStorage.setItem(id, data)
 const clearStore = id => localStorage.removeItem(id)
 
 const createDownload = async (type) => {
+  if (Object.entries(state).filter(e => e.value).length <= 1) return
   downloadEl.innerHTML = ''
   const options = {
     header: state.saveHeader.checked
@@ -63,59 +62,59 @@ const createDownload = async (type) => {
   downloadEl.appendChild(link)
 }
 
-const onSettingsChange = controlName => {
-  state[controlName].checked = !state[controlName].checked
+const onCheckboxChange = id => {
+  state[id].checked = !state[id].checked
   storeLocal('state', JSON.stringify(state))
   createDownload('text/csv')
 }
 
-const displaySettings = () => {
-  controlsEl.innerHTML = ''
-  controlsEl.appendChild(renderControls(state, onSettingsChange))
+const onInputChange = (id, value, type) => {
+  if (type === 'value') {
+    state[id].value = value
+  }
+  if (type = 'title') {
+    state[id].title = value
+  }
+  storeLocal('state', JSON.stringify(state))
+  createDownload('text/csv')
+}
+
+const displayInfo = () => {
+  resultEl.innerHTML = ''
+  resultEl.appendChild(renderInfo(state, onCheckboxChange, onInputChange))
 }
 
 btnClearSettings.addEventListener('click', () => {
-  state = updateObject(state, getInitialState())
+  const oldState = state
+  const newState = getInitialState()
+  Object.entries(oldState)
+    .forEach(e => {
+      newState[e[0]].value = e[1].value
+      newState[e[0]].img = e[1].img
+    })
+  state = newState
   storeLocal('state', JSON.stringify(state))
-  displaySettings()
+  displayInfo()
 })
-
-const displayCarData = () => {
-  const carData = Object.keys(state)
-    .filter(key => state[key].value)
-    .reduce((obj, key) => {
-      obj[key] = state[key].value;
-      return obj;
-    }, {});
-  Object.entries(carData).length !== 0 && carData.constructor === Object ? textEl.value = JSON.stringify(carData, null, 2) : textEl.value = ''
-}
 
 const clearCarData = () => {
-  Object.keys(state).forEach(key => {
-    if (state[key].value !== null) {
-      state[key].value = null
-    }
-  })
+  const oldState = state
+  const newState = getInitialState()
+  Object.entries(oldState)
+    .forEach(e => {
+      newState[e[0]].checked = e[1].checked
+      newState[e[0]].title = e[1].title
+    })
+  state = newState
   storeLocal('state', JSON.stringify(state))
-  displayCarData()
+  displayInfo()
 }
-
-const updateCarDataFromInput = async input => {
-  Object.keys(input).forEach(key => state[key].value = input[key])
-  storeLocal('state', JSON.stringify(state))
-  createDownload('text/csv')
-}
-
-textEl.addEventListener('input', () => {
-  updateCarDataFromInput(JSON.parse(event.target.value))
-})
 
 clearCarBtn.addEventListener('click', () => { clearCarData() })
 
 window.onload = async () => {
   initialiseState()
-  displaySettings()
-  displayCarData()
+  displayInfo()
   createDownload('text/csv')
 }
 

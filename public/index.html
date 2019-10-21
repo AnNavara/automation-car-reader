@@ -10,47 +10,33 @@
 </head>
 
 <body>
-  <div class="Instruction">
+  <div class="instruction wrapper">
     <p>1. Go to vehicle/statistics page</p>
     <p>2. Make screenshots of Design, Markets and Test Track tabs</p>
     <p>3. Upload. Check your stats, it's not 100%. Most offenders are 11 and skipped dots</p>
   </div>
-  <div class="Controls Wrapper">
-    <div>
-      <input type="file" name="" id="File">
-      <span id="Progress"></span>
-    </div>
-    <div>
-      <button class="hide">Hide</button>
-      <div class="imgs"></div>
-    </div>
+  <div class="upload wrapper">
+    <input type="file" name="" id="File">
+    <span id="Progress"></span><span id="Jobs"></span>
   </div>
-  <div class="content Wrapper">
-    <div class="Result">
-      <div class="Result__wrapper">
-        <button class="btn" id="Clear">Clear Saved</button>
-        <div id="Download"></div>
-      </div>
-      <textarea rows="64" cols="50" id="Text"></textarea>
+  <div class="content wrapper">
+    <div class="content__controls">
+      <button class="btn clearSettings">Default Settings</button>
+      <button class="btn" id="Clear">Clear Saved</button>
+      <div id="Download"></div>
     </div>
-    <div class="settings">
-      <div class="settings__wrapper">
-        <h3>Things to export</h3>
-        <button class="btn clearSettings">Default Settings</button>
-      </div>
-      <div class="controls"></div>
-    </div>
+    <div class="result"></div>
   </div>
   <template id="Template">
-    <div class="setting">
-      <label>
-        <input class="checkbox" type="checkbox">
-        <span class="textContent"></span>
-      </label>
+    <div class="info">
+      <input class="checkbox" type="checkbox">
+      <input class="title" type="text">
+      <input class="value" type="text">
+      <div class="img">
+      </div>
     </div>
   </template>
   <script src="https://cdn.jsdelivr.net/npm/jimp@0.8.4/browser/lib/jimp.min.js"></script>
-  <!-- <script src='https://unpkg.com/tesseract.js@v2.0.0-beta.1/dist/tesseract.min.js'></script> -->
   <script src='./lib/tesseract.min.js'></script>
   <script src="https://cdn.jsdelivr.net/npm/json2csv"></script>
   <script type="module" src="./scripts/main.js"></script>

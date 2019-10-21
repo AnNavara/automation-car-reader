@@ -1,9 +1,8 @@
 import recognize from './recognize.js';
+import { updateObject } from './utility.js'
 
-const imageContainer = document.querySelector('.imgs')
-const btnHideImages = document.querySelector('.hide')
-
-const readImg = async (file, size) => {
+const readImg = async (file, size, field, state) => {
+  const obj = { ...state }
   const data = await jimp.read(file)
     .then(result => {
       const mime = jimp.MIME_PNG
@@ -14,25 +13,18 @@ const readImg = async (file, size) => {
         .invert()
         .getBufferAsync(mime)
     })
-    .catch(err => console.log(err))
-  const image = document.createElement('img')
-  image.src = await jimp.read(data)
+    .catch(err => { throw new Error(err) })
+  obj[field].img = await jimp.read(data)
     .then(result => {
       const mime = jimp.MIME_PNG
       return result
         .getBase64Async(mime)
     })
-    .catch(err => console.log(err))
+    .catch(err => { throw new Error(err) })
 
-  btnHideImages.classList.add('hide--active')
-  imageContainer.appendChild(image)
-  return await recognize(data, size)
+  obj[field].search.read = await recognize(data, size)
+  return updateObject(state, obj)
 }
-
-btnHideImages.addEventListener('click', () => {
-  imageContainer.classList.toggle('imgs--show')
-  btnHideImages.classList.toggle('hide--open')
-})
 
 export {
   readImg

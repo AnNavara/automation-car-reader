@@ -13,15 +13,15 @@ const recognize = async data => {
           workerCount++
         }
         if (m.progress !== 1) {
-          progress.innerHTML = `Job - ${workerCount}. Processing`
+          progress.innerHTML = `Processing - ${workerCount}`
           return
         }
-        progress.innerHTML = `Job - ${workerCount} Finished`
+        progress.innerHTML = `Finished - ${workerCount}`
       } else if (m.status === 'loading tesseract core') {
         if (workerId !== m.workerId && m.workerId !== undefined) {
           workerId = m.workerId
         }
-        progress.innerHTML = '...Loading Job'
+        progress.innerHTML = `...Loading - ${workerCount}`
       }
     }
   });
