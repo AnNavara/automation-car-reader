@@ -3,6 +3,5 @@
 
 ### Things to do
  * Multiple upload
- * Fix display of progress
  * Input ot update removem words as of "CSC, CSR, AGC, FUA"
  * Saving presets

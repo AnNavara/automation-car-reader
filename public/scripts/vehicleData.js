@@ -46,7 +46,12 @@ const getVehicleData = async (img, imageType) => {
 
   if (imageType === 'Design') {
     const renctanglesArr = getRectangles()
-    JobsEl.textContent = ' / ' + renctanglesArr.length
+    if (parseInt(JobsEl.textContent.replace('\/', ''))) {
+      const number = renctanglesArr.length + parseInt(JobsEl.textContent.replace('\/', ''))
+      JobsEl.textContent = ' / ' + number
+    } else {
+      JobsEl.textContent = ' / ' + renctanglesArr.length
+    }
     await runRead(renctanglesArr)
 
     //
@@ -82,7 +87,7 @@ const getVehicleData = async (img, imageType) => {
     newState.enginePosition.value = [info.enginePosition.read.split(' ')[1], info.enginePosition.read.split(' ')[2]].join(' ')
     newState.driveType.value = info.enginePosition.read.split(' ')[4]
     // Gearbox 
-    newState.gearbox.value = info.gearbox.read.split(' ').length > 4 ? [info.gearbox.read.split(' ')[3], info.gearbox.read.split(' ')[4]].join(' ') : newState.gearbox.search.read.split(' ')[3]
+    newState.gearbox.value = info.gearbox.read.split(' ').length > 4 ? [info.gearbox.read.split(' ')[3], info.gearbox.read.split(' ')[4]].join(' ') : newState.gearbox.read.split(' ')[3]
     newState.gears.value = parseInt(info.gearbox.read.split(' ')[1])
     // Weight
     newState.weight.value = parseInt(info.weight.read.split(' ')[1])
@@ -119,59 +124,73 @@ const getVehicleData = async (img, imageType) => {
 
   if (imageType === 'Markets') {
     const renctanglesArr = getRectangles()
-    JobsEl.textContent = ' / ' + renctanglesArr.length
+    if (parseInt(JobsEl.textContent.replace('\/', ''))) {
+      const number = renctanglesArr.length + parseInt(JobsEl.textContent.replace('\/', ''))
+      JobsEl.textContent = ' / ' + number
+    } else {
+      JobsEl.textContent = ' / ' + renctanglesArr.length
+    }
     await runRead(renctanglesArr)
 
-    newState.drivability.value = checkValidity(newState.drivability.search.read)
-    newState.sportiness.value = checkValidity(newState.sportiness.search.read, 50)
-    newState.comfort.value = checkValidity(newState.comfort.search.read)
-    newState.prestige.value = checkValidity(newState.prestige.search.read)
-    newState.safety.value = checkValidity(newState.safety.search.read)
-    newState.practicality.value = checkValidity(newState.practicality.search.read)
-    newState.utility.value = checkValidity(newState.utility.search.read)
-    newState.offroad.value = checkValidity(newState.offroad.search.read)
-    newState.reliability.value = checkValidity(newState.reliability.search.read)
-    newState.environmentalResistance.value = checkValidity(newState.environmentalResistance.search.read)
-    newState.footprint.value = checkValidity(newState.footprint.search.read, 10)
-    newState.cargoVolume.value = parseInt(newState.cargoVolume.search.read)
-    newState.passengerVolume.value = parseInt(newState.passengerVolume.search.read)
-    newState.serviceCosts.value = checkValidity(newState.serviceCosts.search.read, 5000, 10)
-    newState.fuelEconomy.value = checkValidity(newState.fuelEconomy.search.read, 30)
-    newState.emissions.value = newState.emissions.search.read
-    newState.octane.value = newState.octane.search.read
-    newState.materialCosts.value = parseInt(newState.materialCosts.search.read)
-    newState.productionUnits.value = checkValidity(newState.productionUnits.search.read, 150)
-    newState.engineeringUnits.value = checkValidity(newState.engineeringUnits.search.read, 150)
-    newState.aproximateCost.value = newState.aproximateCost.search.read
+    newState.drivability.value = checkValidity(info.drivability.read)
+    newState.sportiness.value = checkValidity(info.sportiness.read, 50)
+    newState.comfort.value = checkValidity(info.comfort.read)
+    newState.prestige.value = checkValidity(info.prestige.read)
+    newState.safety.value = checkValidity(info.safety.read)
+    newState.practicality.value = checkValidity(info.practicality.read)
+    newState.utility.value = checkValidity(info.utility.read)
+    newState.offroad.value = checkValidity(info.offroad.read)
+    newState.reliability.value = checkValidity(info.reliability.read)
+    newState.environmentalResistance.value = checkValidity(info.environmentalResistance.read)
+    newState.footprint.value = checkValidity(info.footprint.read, 10)
+    newState.cargoVolume.value = parseInt(info.cargoVolume.read)
+    newState.passengerVolume.value = parseInt(info.passengerVolume.read)
+    newState.serviceCosts.value = checkValidity(info.serviceCosts.read, 5000, 10)
+    newState.fuelEconomy.value = checkValidity(info.fuelEconomy.read, 30)
+    newState.emissions.value = info.emissions.read
+    newState.octane.value = info.octane.read
+    newState.materialCosts.value = parseInt(info.materialCosts.read)
+    newState.productionUnits.value = checkValidity(info.productionUnits.read, 150)
+    newState.engineeringUnits.value = checkValidity(info.engineeringUnits.read, 150)
+    newState.aproximateCost.value = info.aproximateCost.read
   }
 
   if (imageType === 'Test Track') {
     const renctanglesArr = getRectangles()
-    JobsEl.textContent = ' / ' + renctanglesArr.length
+    if (parseInt(JobsEl.textContent.replace('\/', ''))) {
+      const number = renctanglesArr.length + parseInt(JobsEl.textContent.replace('\/', ''))
+      JobsEl.textContent = ' / ' + number
+    } else {
+      JobsEl.textContent = ' / ' + renctanglesArr.length
+    }
+    
     await runRead(renctanglesArr)
 
-    newState.topSpeed.value = newState.topSpeed.search.read.split(' ')[0]
-    newState.acceleration.value = checkValidity(newState.acceleration.search.read, 150, 100)
-    newState.speedingUp.value = checkValidity(newState.speedingUp.search.read, 100, 100)
-    newState.oneFourthMileTime.value = checkValidity(newState.oneFourthMileTime.search.read, 1000, 100)
-    newState.oneKMTime.value = checkValidity(newState.oneKMTime.search.read, 1000, 100)
-    newState.twentyMG.value = checkValidity(newState.twentyMG.search.read, 100, 1000)
-    newState.twohundredMG.value = checkValidity(newState.twohundredMG.search.read, 100, 1000)
-    newState.rollAngle.value = checkValidity(newState.rollAngle.search.read, 15)
-    newState.brakingDistance.value = checkValidity(newState.brakingDistance.search.read)
-    newState.breakeFadeD.value = checkValidity(newState.breakeFadeD.search.read, 10, 10)
-    newState.breakeFadeS.value = checkValidity(newState.breakeFadeS.search.read, 10, 10)
-    newState.breakeFadeU.value = checkValidity(newState.breakeFadeU.search.read, 10, 10)
-    newState.frontalArea.value = parseFloat(newState.frontalArea.search.read, 100, 1000)
-    newState.totalCoeficientOfDrag.value = parseFloat(newState.totalCoeficientOfDrag.search.read, 100, 1000)
-    newState.frontDownforce.value = checkValidity(newState.frontDownforce.search.read, 500, 10)
-    newState.rearDownforce.value = checkValidity(newState.rearDownforce.search.read)
-    newState.powerToWeight.value = checkValidity(newState.powerToWeight.search.read, 1, 1000)
-    newState.towCapacity.value = parseFloat(newState.towCapacity.search.read)
-    newState.loadCapacity.value = checkValidity(newState.loadCapacity.search.read, 2500, 10)
+    newState.topSpeed.value = info.topSpeed.read.split(' ')[0]
+    newState.acceleration.value = checkValidity(info.acceleration.read, 150, 100)
+    newState.speedingUp.value = checkValidity(info.speedingUp.read, 100, 100)
+    newState.oneFourthMileTime.value = checkValidity(info.oneFourthMileTime.read, 1000, 100)
+    newState.oneKMTime.value = checkValidity(info.oneKMTime.read, 1000, 100)
+    newState.twentyMG.value = checkValidity(info.twentyMG.read, 100, 1000)
+    newState.twohundredMG.value = checkValidity(info.twohundredMG.read, 100, 1000)
+    newState.rollAngle.value = checkValidity(info.rollAngle.read, 15)
+    newState.brakingDistance.value = checkValidity(info.brakingDistance.read)
+    newState.breakeFadeD.value = checkValidity(info.breakeFadeD.read, 10, 10)
+    newState.breakeFadeS.value = checkValidity(info.breakeFadeS.read, 10, 10)
+    newState.breakeFadeU.value = checkValidity(info.breakeFadeU.read, 10, 10)
+    newState.frontalArea.value = parseFloat(info.frontalArea.read, 100, 1000)
+    newState.totalCoeficientOfDrag.value = parseFloat(info.totalCoeficientOfDrag.read, 100, 1000)
+    newState.frontDownforce.value = checkValidity(info.frontDownforce.read, 500, 10)
+    newState.rearDownforce.value = checkValidity(info.rearDownforce.read, 500, 10)
+    newState.powerToWeight.value = checkValidity(info.powerToWeight.read, 1, 1000)
+    newState.towCapacity.value = parseFloat(info.towCapacity.read)
+    newState.loadCapacity.value = checkValidity(info.loadCapacity.read, 2500, 10)
   }
 
-  updateObject(newState, info)
+  Object.entries(info)
+    .forEach(e => {
+      newState[e[0]].img = e[1].img
+    })
   return newState
 }
 
