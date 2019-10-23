@@ -13,25 +13,41 @@ const btnReset = document.querySelector('#reset')
 
 let state = {}
 
-const readFile = () => {
-  const reader = new FileReader()
-  reader.addEventListener('load', async () => {
-    try {
-      const imageType = await detectImage(reader.result)
-      state = await getVehicleData(reader.result, imageType)
-      storeLocal('state', JSON.stringify(state))
-      displayInfo()
-      createDownload('text/csv')
-    } catch (err) {
-      console.log(err)
-      document.querySelector('.instruction').textContent = 'ERROR: ' + err
+const readFileAsync = file => {
+  return new Promise((resolve, reject) => {
+    let reader = new FileReader()
+    reader.onload = () => {
+      resolve(reader.result)
     }
+    reader.onerror = reject
+    reader.readAsDataURL(file)
   })
-  reader.readAsDataURL(input.files[0])
+}
+
+const processFile = async (file) => {
+  try {
+    const imageType = await detectImage(file)
+    state = await getVehicleData(file, imageType)
+    storeLocal('state', JSON.stringify(state))
+    displayInfo()
+    createDownload('text/csv')
+    return 'finished'
+  } catch (err) {
+    console.log(err)
+    document.querySelector('.instruction').textContent = 'ERROR: ' + err
+    return err
+  }
+}
+
+const getInfo = async () => {
+  for (let i = 0; i < input.files.length; i++) {
+    const file = await readFileAsync(input.files[i])
+    await processFile(file)
+  }
 }
 
 input.addEventListener('change', () => {
-  readFile()
+  getInfo()
 })
 
 const initialiseState = () => {

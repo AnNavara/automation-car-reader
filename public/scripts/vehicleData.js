@@ -87,7 +87,7 @@ const getVehicleData = async (img, imageType) => {
     newState.enginePosition.value = [info.enginePosition.read.split(' ')[1], info.enginePosition.read.split(' ')[2]].join(' ')
     newState.driveType.value = info.enginePosition.read.split(' ')[4]
     // Gearbox 
-    newState.gearbox.value = info.gearbox.read.split(' ').length > 4 ? [info.gearbox.read.split(' ')[3], info.gearbox.read.split(' ')[4]].join(' ') : newState.gearbox.read.split(' ')[3]
+    newState.gearbox.value = info.gearbox.read.split(' ').length > 4 ? [info.gearbox.read.split(' ')[3], info.gearbox.read.split(' ')[4]].join(' ') : info.gearbox.read.split(' ')[3]
     newState.gears.value = parseInt(info.gearbox.read.split(' ')[1])
     // Weight
     newState.weight.value = parseInt(info.weight.read.split(' ')[1])
