@@ -9,6 +9,16 @@ export const getInitialState = function () {
       checked: true,
       title: 'Export with header'
     },
+    omitWords: {
+      pageType: 'Helper',
+      elementConfig: {
+        type: 'checkbox',
+        placeholder: 'Omit words'
+      },
+      checked: true,
+      title: 'Omit words',
+      value: 'CSR, CSC, TCC'
+    },
     company: {
       pageType: 'Design',
       elementConfig: {

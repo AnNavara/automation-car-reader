@@ -134,7 +134,7 @@ clearCarBtn.addEventListener('click', () => { clearCarData() })
 btnReset.addEventListener('click', () => {
   clearStore('state')
   state = getInitialState()
-  renderInfo()
+  displayInfo()
 })
 
 window.onload = async () => {

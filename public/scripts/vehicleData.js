@@ -59,8 +59,7 @@ const getVehicleData = async (img, imageType) => {
     // 
 
     // ADD Check for CSR/CSC/3 Letter Skip
-    // Maybe join together model and company
-    const exclude = ['CSR', 'CSC']
+    const exclude = state.omitWords.value.split(',').map(e => e.trim())
     const split = info.company.read.split('-')
     const read = split.filter(str => {
       let r = false
@@ -74,7 +73,6 @@ const getVehicleData = async (img, imageType) => {
 
     // Doors and Seats
     // Fix for +2
-    //.replace(/(\/|\n)/gm, '')
     newState.doorCount.value = checkValidity(info.doorCount.read.split(' ')[1])
     newState.seatCount.value = checkValidity(info.doorCount.read.split(' ')[4].replace('/0', ''))
     // Wheelbase, Length, Width
