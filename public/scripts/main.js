@@ -92,7 +92,7 @@ const onInputChange = (id, value, type) => {
     state[id].value = value
   }
   if (type = 'title') {
-    state[id].title = value
+    state[id].title = title
   }
   storeLocal('state', JSON.stringify(state))
   createDownload('text/csv')
