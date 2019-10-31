@@ -115,6 +115,15 @@ body {
   justify-content: flex-start;
 }
 
+input:disabled {
+  background-color: transparent;
+}
+
+.info input.locked {
+  border: none;
+  box-shadow: none;
+}
+
 .img {
   display: flex;
   min-width: 150px;

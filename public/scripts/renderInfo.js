@@ -26,6 +26,22 @@ export const renderInfo = (state, checkboxChange, inputChange) => {
     value.id = e.id
     img.src = e.config.img ? e.config.img : ''
     e.config.img ? imgEl.appendChild(img) : null
+
+    if (e.config.pageType === 'Helper') {
+      title.classList.add('locked')
+      title.locked = true
+      title.setAttribute('readonly', true)
+
+      if (!e.config.value) {
+        value.classList.add('locked')
+        value.setAttribute('disabled', true)
+      }
+    }
+
+    if (e.config.error === true) {
+      value.classList.add('error')
+    }
+
     title.addEventListener('change', event => {
       inputChange(event.target.id, event.target.value, 'title')
     })
